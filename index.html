@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VPN Premium Connection Center</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts & FontAwesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] },
+          colors: {
+            brand: {
+              50: '#f5f3ff', 100: '#ede9fe', 500: '#8b5cf6', 600: '#7c3aed', 700: '#6d28d9', 900: '#4c1d95',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background: radial-gradient(circle at 50% 0%, #0d0b21 0%, #070a13 100%);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      color: #f8fafc;
+      overflow-x: hidden;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+    .glass {
+      background: rgba(15, 23, 42, 0.55);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .glass-input {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: white;
+    }
+    .glass-input:focus {
+      border-color: #8b5cf6;
+      box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
+      outline: none;
+    }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+
+  <!-- Firebase SDK (Realtime Database) -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getDatabase, ref, get, set, remove, onValue } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyASptGcJVys78qah6ctIQ5HL_gp0hquIOo",
+      authDomain: "ratka-d55a7.firebaseapp.com",
+      databaseURL: "https://ratka-d55a7-default-rtdb.firebaseio.com",
+      projectId: "ratka-d55a7",
+      storageBucket: "ratka-d55a7.firebasestorage.app",
+      messagingSenderId: "238071660404",
+      appId: "1:238071660404:web:e9e44f3945e364b47db621"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    window.db = db;
+    window.dbRefs = { ref, get, set, remove, onValue };
+  </script>
+</head>
+<body class="flex flex-col justify-between">
+
+  <script>
+    function triggerRickroll() {
+      document.body.innerHTML = `
+        <div class="flex flex-col items-center justify-center h-screen bg-black text-center px-4">
+          <h1 class="text-red-500 font-black text-2xl mb-4 animate-pulse">DEVTOOLS IS NOT ALLOWED!</h1>
+          <div class="w-full max-w-lg aspect-video rounded-2xl overflow-hidden shadow-2xl border border-red-500/30">
+            <iframe class="w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&controls=0&mute=0" title="Rickroll" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+          <p class="text-slate-500 text-xs mt-4">Never gonna give you up, never gonna let you down...</p>
+        </div>
+      `;
+    }
+
+    document.addEventListener('contextmenu', e => e.preventDefault());
+
+    document.addEventListener('keydown', e => {
+      if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74 || e.keyCode == 67)) || (e.ctrlKey && e.keyCode == 85)) {
+        e.preventDefault();
+        triggerRickroll();
+        return false;
+      }
+    });
+
+    setInterval(function() {
+      const t1 = new Date();
+      debugger;
+      const t2 = new Date();
+      if (t2 - t1 > 100) {
+        triggerRickroll();
+      }
+    }, 200);
+
+    const __ADMIN_PASSWORD__ = "@Holyn1k__Holybaam1";
+  </script>
+
+  <!-- Main Container -->
+  <div id="appContainer" class="w-full max-w-xl mx-auto px-4 py-8 flex-grow">
+    
+    <!-- HEADER -->
+    <header class="flex items-center justify-between mb-8">
+      <div class="flex items-center gap-3">
+        <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brand-600 to-indigo-400 flex items-center justify-center shadow-lg shadow-brand-500/30">
+          <i class="fa-solid fa-bolt text-xl text-white"></i>
+        </div>
+        <div>
+          <h1 class="text-xl font-black tracking-tight bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">HOLY NET</h1>
+          <p class="text-xs text-brand-500 font-semibold tracking-wider">ULTRA SPEED VPN</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <button onclick="refreshData()" class="w-10 h-10 rounded-xl glass flex items-center justify-center hover:bg-slate-800/60 transition-all text-slate-300">
+          <i class="fa-solid fa-arrows-rotate text-sm"></i>
+        </button>
+        <span id="globalStatusBadge" class="px-3 py-1.5 rounded-xl glass text-xs font-semibold text-red-400 flex items-center gap-1.5 border border-red-500/20">
+          <span class="w-2 h-2 rounded-full bg-red-400"></span> Ошибка ссылки
+        </span>
+      </div>
+    </header>
+
+    <div id="toastContainer" class="fixed top-6 left-1/2 -translate-x-1/2 z-50 flex flex-col gap-2 w-full max-w-sm px-4"></div>
+
+    <!-- CLIENT VIEW -->
+    <main id="clientView" class="space-y-6">
+      
+      <!-- Error Card if access without ID -->
+      <div id="noUserCard" class="glass rounded-3xl p-6 text-center space-y-4">
+        <i class="fa-solid fa-circle-xmark text-4xl text-red-500 animate-bounce"></i>
+        <h2 class="text-lg font-bold text-white">Доступ ограничен</h2>
+        <p class="text-sm text-slate-400">Вход по ручному ID заблокирован. Вы должны использовать вашу персональную ссылку с уникальным ID в конце (например: <code class="text-brand-400 font-mono">?id=Ivdkf9ZigC</code>).</p>
+      </div>
+
+      <!-- STATS CARD -->
+      <div id="statsCard" class="hidden glass rounded-3xl p-6 relative overflow-hidden space-y-6">
+        <div class="absolute -top-24 -right-24 w-48 h-48 bg-brand-500/20 blur-3xl rounded-full"></div>
+
+        <div class="flex items-start justify-between">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-widest text-slate-500">Абонент</span>
+            <h2 id="clientName" class="text-2xl font-extrabold text-white">Загрузка...</h2>
+            <p id="clientStatusUpdate" class="text-xs text-slate-400 mt-1"><i class="fa-solid fa-rotate-right mr-1"></i>Автообновление трафика</p>
+          </div>
+          <div class="text-right">
+            <span class="text-xs font-bold uppercase tracking-widest text-slate-500">Статус</span>
+            <div id="clientStatusBadge" class="mt-1 px-3 py-1 rounded-full text-xs font-bold inline-block">--</div>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <div class="flex justify-between items-end">
+            <div class="flex items-center gap-1.5">
+              <i class="fa-solid fa-server text-brand-500"></i>
+              <span class="text-sm text-slate-300">Использовано трафика</span>
+            </div>
+            <span id="trafficRatio" class="text-base font-bold text-white">0 GB / 0 GB</span>
+          </div>
+          <div class="w-full bg-slate-900/80 rounded-full h-4 p-0.5 border border-white/5">
+            <div id="progressBar" class="bg-gradient-to-r from-brand-500 to-indigo-500 h-2.5 rounded-full transition-all duration-1000" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-3 pt-2 border-t border-white/5 text-center">
+          <div class="glass bg-white/5 p-2.5 rounded-xl">
+            <span class="text-[10px] text-slate-400 block mb-0.5">Истекает</span>
+            <span id="expiryDate" class="text-xs font-bold text-white truncate block">--.--.----</span>
+          </div>
+          <div class="glass bg-white/5 p-2.5 rounded-xl">
+            <span class="text-[10px] text-slate-400 block mb-0.5">Лимит устр.</span>
+            <span id="deviceLimitBadge" class="text-xs font-bold text-indigo-400 block">--</span>
+          </div>
+          <div class="glass bg-white/5 p-2.5 rounded-xl">
+            <span class="text-[10px] text-slate-400 block mb-0.5">Осталось</span>
+            <span id="timeLeft" class="text-xs font-bold text-emerald-400 block">-- дн.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONNECTION CARD -->
+      <div id="connectionCard" class="hidden glass rounded-3xl p-6 space-y-4">
+        <h3 class="text-md font-bold flex items-center gap-2 text-white">
+          <i class="fa-solid fa-link text-brand-500"></i> Настройка подключения
+        </h3>
+
+        <div class="space-y-2">
+          <span class="text-xs font-semibold text-slate-400">Ссылка для вставки в приложение (Hap / Hiddify):</span>
+          <div class="flex gap-2">
+            <input type="text" id="subUrlField" readonly class="glass-input flex-grow px-3 py-2.5 rounded-xl text-xs font-mono select-all truncate">
+            <button onclick="copySubscriptionUrl()" class="px-4 rounded-xl bg-brand-600 hover:bg-brand-500 transition-all font-semibold text-xs flex items-center justify-center">
+              <i class="fa-solid fa-copy"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3 pt-2">
+          <button onclick="copyRawConfigs()" class="py-3 px-4 rounded-2xl glass hover:bg-white/5 transition-all flex items-center justify-center gap-2 border border-white/10 text-xs font-semibold">
+            <i class="fa-solid fa-file-code text-brand-400"></i> Скопировать текст
+          </button>
+          <a id="tgChannelBtn" href="https://t.me/your_channel" target="_blank" class="py-3 px-4 rounded-2xl bg-sky-600/20 border border-sky-500/20 hover:bg-sky-600/30 transition-all flex items-center justify-center gap-2 text-xs font-semibold text-sky-300">
+            <i class="fa-brands fa-telegram text-lg"></i> Наш Telegram
+          </a>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- ADMIN PANEL -->
+    <section id="adminView" class="hidden space-y-6">
+      
+      <div id="adminLoginCard" class="glass rounded-3xl p-6 space-y-4">
+        <h2 class="text-xl font-bold flex items-center gap-2"><i class="fa-solid fa-lock text-brand-500"></i> Вход для Администратора</h2>
+        <div class="space-y-3">
+          <input type="password" id="adminPasswordInput" placeholder="Введите мастер-пароль" class="glass-input w-full px-4 py-3 rounded-xl text-sm">
+          <button onclick="authenticateAdmin()" class="w-full py-3 rounded-xl bg-brand-600 hover:bg-brand-500 font-bold transition-all shadow-lg text-sm">Авторизоваться</button>
+        </div>
+      </div>
+
+      <div id="adminDashboard" class="hidden space-y-6">
+        <div class="flex justify-between items-center bg-white/5 p-4 rounded-2xl glass">
+          <h3 class="font-bold text-md text-brand-400"><i class="fa-solid fa-user-gear"></i> Панель управления</h3>
+          <button onclick="exitAdmin()" class="px-4 py-2 rounded-xl bg-red-600/20 border border-red-500/30 text-red-400 font-bold text-xs">Выйти</button>
+        </div>
+
+        <!-- GLOBAL SETTINGS -->
+        <div class="glass rounded-3xl p-5 space-y-4">
+          <h4 class="font-bold text-sm text-white border-b border-white/5 pb-2">1. Глобальные настройки системы</h4>
+          <div class="space-y-3">
+            <div>
+              <label class="text-xs text-slate-400 block mb-1">Ссылка на официальный Telegram-канал подписки:</label>
+              <input type="text" id="adminTgField" class="glass-input w-full px-3 py-2 rounded-xl text-xs" placeholder="https://t.me/...">
+            </div>
+          </div>
+          <button onclick="saveGlobalSettings()" class="w-full py-2.5 rounded-xl bg-brand-600 text-white font-bold text-xs">Сохранить глобальные параметры</button>
+        </div>
+
+        <!-- PROFILES MANAGEMENT -->
+        <div class="glass rounded-3xl p-5 space-y-4">
+          <h4 class="font-bold text-sm text-white border-b border-white/5 pb-2">2. Шаблоны профилей подписок</h4>
+          <div class="space-y-3 bg-white/5 p-3 rounded-xl space-y-2">
+            <span class="text-xs text-brand-400 font-bold block">Создать/Изменить шаблон профиля:</span>
+            <div>
+              <label class="text-[10px] text-slate-400 block mb-0.5">Название профиля (например: VIP или Базовый):</label>
+              <input type="text" id="profName" placeholder="Название профиля" class="glass-input w-full px-3 py-1.5 rounded-xl text-xs">
+            </div>
+            <div class="grid grid-cols-2 gap-2">
+              <div>
+                <label class="text-[10px] text-slate-400 block mb-0.5">Лимит Трафика (GB):</label>
+                <input type="number" id="profTotal" value="372.7" class="glass-input w-full px-3 py-1.5 rounded-xl text-xs">
+              </div>
+              <div>
+                <label class="text-[10px] text-slate-400 block mb-0.5">Лимит устройств:</label>
+                <input type="number" id="profDevice" value="2" class="glass-input w-full px-3 py-1.5 rounded-xl text-xs">
+              </div>
+            </div>
+            <div>
+              <label class="text-[10px] text-slate-400 block mb-0.5">Конфигурации для профиля (каждая строка — новый vless):</label>
+              <textarea id="profConfigs" rows="2" placeholder="Вставьте vless конфигурации..." class="glass-input w-full px-3 py-1.5 rounded-xl text-xs font-mono"></textarea>
+            </div>
+            <button onclick="saveProfileTemplate()" class="w-full py-1.5 bg-indigo-600 hover:bg-indigo-500 rounded-xl font-bold text-xs">Сохранить этот профиль в шаблоны</button>
+          </div>
+          <div>
+            <label class="text-xs text-slate-400 block mb-1">Список готовых профилей в базе:</label>
+            <div id="profilesList" class="flex flex-wrap gap-2"></div>
+          </div>
+        </div>
+
+        <!-- ADD / EDIT USER -->
+        <div class="glass rounded-3xl p-5 space-y-4">
+          <h4 class="font-bold text-sm text-white border-b border-white/5 pb-2">3. Редактор / Добавление пользователей</h4>
+          
+          <div class="bg-brand-900/20 p-3 rounded-xl border border-brand-500/20">
+            <label class="text-xs text-brand-400 font-bold block mb-1">Быстро применить готовый профиль подписки:</label>
+            <select id="userProfileSelector" onchange="applyProfileToForm()" class="glass-input w-full px-3 py-2 rounded-xl text-xs bg-slate-900">
+              <option value="">-- Выберите профиль для автозаполнения --</option>
+            </select>
+          </div>
+
+          <div class="space-y-3">
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="text-[10px] text-slate-400 block mb-1">Уникальный ID пользователя (для хвоста ссылки):</label>
+                <input type="text" id="newUserId" placeholder="Например: Ivdkf9ZigC" class="glass-input w-full px-3 py-2 rounded-xl text-xs font-mono">
+              </div>
+              <div>
+                <label class="text-[10px] text-slate-400 block mb-1">Имя или Псевдоним абонента:</label>
+                <input type="text" id="newUserName" placeholder="Иван Иванов" class="glass-input w-full px-3 py-2 rounded-xl text-xs">
+              </div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-2">
+              <div>
+                <label class="text-[10px] text-slate-400 block mb-1">Предел ГБ трафика:</label>
+                <input type="number" id="newUserLimit" value="372.7" class="glass-input w-full px-3 py-2 rounded-xl text-xs">
+              </div>
+              <div>
+                <label class="text-[10px] text-slate-400 block mb-1">Уже потрачено ГБ:</label>
+                <input type="number" step="0.1" id="newUserUsed" value="0" class="glass-input w-full px-3 py-2 rounded-xl text-xs">
+              </div>
+              <div>
+                <label class="text-[10px] text-slate-400 block mb-1">Макс. устройств:</label>
+                <input type="number" id="newUserDevices" value="2" class="glass-input w-full px-3 py-2 rounded-xl text-xs">
+              </div>
+            </div>
+
+            <div>
+              <label class="text-[10px] text-slate-400 block mb-1">Дата окончания действия доступа:</label>
+              <input type="date" id="newUserExpiry" value="2026-07-13" class="glass-input w-full px-3 py-2 rounded-xl text-xs">
+            </div>
+
+            <div>
+              <label class="text-[10px] text-slate-400 block mb-1">Список VPN Конфигов в подписке (каждая строка — ОТДЕЛЬНЫЙ конфиг):</label>
+              <textarea id="newUserConfigs" rows="4" placeholder="Вставьте сюда vless:// строки. Каждую конфигурацию пишите с новой строчки." class="glass-input w-full px-3 py-2 rounded-xl text-xs font-mono"></textarea>
+            </div>
+
+            <button onclick="saveUser()" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-brand-600 to-indigo-600 font-bold text-xs text-white shadow-md">Записать пользователя в систему</button>
+          </div>
+        </div>
+
+        <!-- USERS LIST -->
+        <div class="glass rounded-3xl p-5 space-y-4">
+          <h4 class="font-bold text-sm text-white border-b border-white/5 pb-2">4. Зарегистрированные устройства</h4>
+          <div id="usersListContainer" class="space-y-3 max-h-[300px] overflow-y-auto no-scrollbar"></div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer class="w-full max-w-xl mx-auto px-4 py-6 border-t border-white/5 flex items-center justify-between text-xs text-slate-500">
+    <span>© 2026 HOLY NET.</span>
+    <button onclick="toggleAdminView()" class="w-8 h-8 rounded-lg glass flex items-center justify-center text-slate-500 hover:text-slate-200">
+      <i class="fa-solid fa-shield-halved text-sm"></i>
+    </button>
+  </footer>
+
+  <!-- CORE LOGIC APPLICATION -->
+  <script type="module">
+    let currentUserData = null;
+    let selectedUserId = null;
+    let allUsersList = [];
+    let allProfilesMap = {};
+    let currentTgChannel = "https://t.me/your_channel";
+
+    window.onload = async () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const targetUserId = urlParams.get('id');
+
+      try {
+        // Подгружаем глобальные настройки и шаблоны тарифов
+        listenGlobalSettings();
+        listenProfiles();
+
+        if (targetUserId) {
+          selectedUserId = targetUserId;
+          await startLiveClientTracking(targetUserId);
+        } else {
+          // Если зашли просто так без id в ссылке
+          document.getElementById('noUserCard').classList.remove('hidden');
+        }
+      } catch (err) {
+        showToast("Ошибка связи с базой данных.", "error");
+        console.error(err);
+      }
+    };
+
+    function listenGlobalSettings() {
+      const refSetting = window.dbRefs.ref(window.db, 'global_settings');
+      window.dbRefs.onValue(refSetting, (snap) => {
+        if (snap.exists()) {
+          const d = snap.val();
+          if (d.tgChannel) {
+            currentTgChannel = d.tgChannel;
+            document.getElementById('tgChannelBtn').href = d.tgChannel;
+            document.getElementById('adminTgField').value = d.tgChannel;
+          }
+        }
+      });
+    }
+
+    function listenProfiles() {
+      const refProf = window.dbRefs.ref(window.db, 'profiles');
+      window.dbRefs.onValue(refProf, (snap) => {
+        allProfilesMap = snap.val() || {};
+        renderProfilesAdminBlock();
+        updateProfileSelector();
+      });
+    }
+
+    async function startLiveClientTracking(userId) {
+      const refUser = window.dbRefs.ref(window.db, 'vpn_users/' + userId);
+      
+      window.dbRefs.onValue(refUser, (s) => {
+        if (s.exists()) {
+          currentUserData = s.val();
+          
+          const urlParams = new URLSearchParams(window.location.search);
+          const isRawRequest = urlParams.get('raw') === '1' || urlParams.get('config') === '1';
+          
+          if (isRawRequest) {
+            renderRawSubscription(currentUserData.configs || []);
+          } else {
+            renderClientPortal(currentUserData);
+          }
+        } else {
+          document.getElementById('noUserCard').innerHTML = `
+            <i class="fa-solid fa-user-slash text-4xl text-amber-500 animate-pulse"></i>
+            <h2 class="text-lg font-bold text-white">Подписка не найдена</h2>
+            <p class="text-sm text-slate-400">Пользователя с ID <code class="text-amber-400 font-mono">${userId}</code> не существует или он был удален админом.</p>
+          `;
+          document.getElementById('noUserCard').classList.remove('hidden');
+        }
+      });
+    }
+
+    function renderRawSubscription(configs) {
+      const txt = configs.join('\n');
+      const b64 = btoa(unescape(encodeURIComponent(txt)));
+      document.open();
+      document.write(b64);
+      document.close();
+    }
+
+    function renderClientPortal(data) {
+      document.getElementById('noUserCard').classList.add('hidden');
+      document.getElementById('statsCard').classList.remove('hidden');
+      document.getElementById('connectionCard').classList.remove('hidden');
+
+      // Индикатор сверху переводим в активное состояние
+      const statusBadge = document.getElementById('globalStatusBadge');
+      statusBadge.className = "px-3 py-1.5 rounded-xl glass text-xs font-semibold text-emerald-400 flex items-center gap-1.5 border border-emerald-500/20";
+      statusBadge.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Подписка активна`;
+
+      document.getElementById('clientName').innerText = data.name || data.id;
+      const u = parseFloat(data.gbUsed) || 0;
+      const t = parseFloat(data.gbTotal) || 0;
+      document.getElementById('trafficRatio').innerText = `${u.toFixed(1)} GB / ${t === -1 ? '∞' : t + ' GB'}`;
+      document.getElementById('progressBar').style.width = `${t > 0 ? Math.min((u/t)*100, 100) : 100}%`;
+      
+      document.getElementById('expiryDate').innerText = data.expiresAt || "Бессрочно";
+      document.getElementById('deviceLimitBadge').innerText = data.deviceLimit || "1";
+      document.getElementById('timeLeft').innerText = calculateDaysLeft(data.expiresAt) + " дн.";
+
+      document.getElementById('clientStatusBadge').innerText = "Активен";
+      document.getElementById('clientStatusBadge').className = "mt-1 px-3 py-1 rounded-full text-xs font-bold inline-block bg-emerald-500/20 text-emerald-400 border border-emerald-500/20";
+
+      const origin = window.location.origin + window.location.pathname;
+      document.getElementById('subUrlField').value = `${origin}?id=${data.id}&raw=1`;
+    }
+
+    function calculateDaysLeft(dateStr) {
+      if(!dateStr) return "∞";
+      const diff = new Date(dateStr) - new Date();
+      if(diff < 0) return "0";
+      return Math.ceil(diff / (1000 * 60 * 60 * 24));
+    }
+
+    // АДМИНКА: Профили
+    window.saveProfileTemplate = async function() {
+      const name = document.getElementById('profName').value.trim();
+      if(!name) return showToast("Укажите имя профиля", "error");
+
+      const refP = window.dbRefs.ref(window.db, 'profiles/' + name);
+      await window.dbRefs.set(refP, {
+        name,
+        gbTotal: parseFloat(document.getElementById('profTotal').value) || 0,
+        deviceLimit: parseInt(document.getElementById('profDevice').value) || 1,
+        configs: document.getElementById('profConfigs').value.split('\n').map(l => l.trim()).filter(l => l)
+      });
+      showToast("Профиль сохранен в шаблоны", "success");
+      document.getElementById('profName').value = "";
+      document.getElementById('profConfigs').value = "";
+    };
+
+    function renderProfilesAdminBlock() {
+      const block = document.getElementById('profilesList');
+      const keys = Object.keys(allProfilesMap);
+      if(keys.length === 0) {
+        block.innerHTML = '<span class="text-xs text-slate-500">Шаблонов нет</span>';
+        return;
+      }
+      block.innerHTML = keys.map(k => `
+        <div class="bg-indigo-900/40 border border-indigo-500/20 px-2 py-1 rounded-lg text-[11px] flex items-center gap-1.5 text-slate-200">
+          <span>${k} (${allProfilesMap[k].gbTotal}GB)</span>
+          <button onclick="deleteProfileTemplate('${k}')" class="text-red-400 hover:text-white ml-1"><i class="fa-solid fa-times"></i></button>
+        </div>
+      `).join('');
+    }
+
+    window.deleteProfileTemplate = async function(name) {
+      await window.dbRefs.remove(window.dbRefs.ref(window.db, 'profiles/' + name));
+      showToast("Профиль удален", "success");
+    };
+
+    function updateProfileSelector() {
+      const sel = document.getElementById('userProfileSelector');
+      const currentVal = sel.value;
+      sel.innerHTML = '<option value="">-- Выберите профиль для автозаполнения --</option>';
+      Object.keys(allProfilesMap).forEach(k => {
+        sel.innerHTML += `<option value="${k}">${k} (Лимит: ${allProfilesMap[k].gbTotal} ГБ, Устройств: ${allProfilesMap[k].deviceLimit})</option>`;
+      });
+      sel.value = currentVal;
+    }
+
+    window.applyProfileToForm = function() {
+      const name = document.getElementById('userProfileSelector').value;
+      if(!name || !allProfilesMap[name]) return;
+      const prof = allProfilesMap[name];
+
+      document.getElementById('newUserLimit').value = prof.gbTotal || 372.7;
+      document.getElementById('newUserDevices').value = prof.deviceLimit || 2;
+      document.getElementById('newUserConfigs').value = (prof.configs || []).join('\n');
+      showToast(`Шаблон "${name}" успешно применен`, "success");
+    };
+
+    // АДМИНКА: Авторизация и Управление пользователями
+    window.authenticateAdmin = function() {
+      const input = document.getElementById('adminPasswordInput').value;
+      
+      if (input === __ADMIN_PASSWORD__) {
+        showToast("Успешный вход в панель", "success");
+        document.getElementById('adminLoginCard').classList.add('hidden');
+        document.getElementById('adminDashboard').classList.remove('hidden');
+        loadUsersList();
+      } else {
+        showToast("Доступ заблокирован: неверный пароль!", "error");
+      }
+    };
+
+    function loadUsersList() {
+      const refAll = window.dbRefs.ref(window.db, 'vpn_users');
+      window.dbRefs.onValue(refAll, (snap) => {
+        allUsersList = [];
+        if (snap.exists()) {
+          snap.forEach(child => {
+            allUsersList.push(child.val());
+          });
+        }
+        
+        const container = document.getElementById('usersListContainer');
+        if(allUsersList.length === 0) {
+          container.innerHTML = '<p class="text-xs text-center text-slate-500">База пользователей пуста</p>';
+          return;
+        }
+        container.innerHTML = allUsersList.map(usr => `
+          <div class="glass p-3 rounded-xl flex justify-between items-center text-xs">
+            <div>
+              <p class="font-bold text-white">${usr.name || 'Без имени'} <span class="text-slate-400 font-mono text-[10px]">(${usr.id})</span></p>
+              <p class="text-[10px] text-brand-400">ГБ: ${usr.gbUsed}/${usr.gbTotal} | Лимит устройств: ${usr.deviceLimit || 1}</p>
+            </div>
+            <div class="flex gap-3 text-sm">
+              <button onclick="editUserCard('${usr.id}')" class="text-indigo-400 hover:text-indigo-200 px-1"><i class="fa-solid fa-pen"></i></button>
+              <button onclick="deleteUser('${usr.id}')" class="text-red-400 hover:text-red-200 px-1"><i class="fa-solid fa-trash"></i></button>
+            </div>
+          </div>
+        `).join('');
+      });
+    }
+
+    // Редактирование пользователя (исправлено)
+    window.editUserCard = function(id) {
+      const usr = allUsersList.find(u => String(u.id) === String(id));
+      if(!usr) return showToast("Не удалось считать данные пользователя", "error");
+      
+      document.getElementById('newUserId').value = usr.id;
+      document.getElementById('newUserName').value = usr.name || "";
+      document.getElementById('newUserLimit').value = usr.gbTotal ?? 372.7;
+      document.getElementById('newUserUsed').value = usr.gbUsed ?? 0;
+      document.getElementById('newUserDevices').value = usr.deviceLimit ?? 1;
+      document.getElementById('newUserExpiry').value = usr.expiresAt || "2026-07-13";
+      document.getElementById('newUserConfigs').value = (usr.configs || []).join('\n');
+      
+      showToast("Данные перенесены в форму редактора", "success");
+      document.getElementById('newUserName').focus();
+    };
+
+    window.saveUser = async function() {
+      const id = document.getElementById('newUserId').value.trim();
+      const name = document.getElementById('newUserName').value.trim();
+      if(!id || !name) return showToast("Заполните обязательно поля ID и Имя!", "error");
+
+      const refUser = window.dbRefs.ref(window.db, 'vpn_users/' + id);
+      const confLines = document.getElementById('newUserConfigs').value.split('\n').map(l => l.trim()).filter(l => l);
+      
+      await window.dbRefs.set(refUser, {
+        id, name,
+        gbTotal: parseFloat(document.getElementById('newUserLimit').value) || 0,
+        gbUsed: parseFloat(document.getElementById('newUserUsed').value) || 0,
+        deviceLimit: parseInt(document.getElementById('newUserDevices').value) || 1,
+        expiresAt: document.getElementById('newUserExpiry').value,
+        configs: confLines
+      });
+      
+      showToast("Пользователь успешно сохранен", "success");
+      
+      // Очистка полей формы
+      document.getElementById('newUserId').value = "";
+      document.getElementById('newUserName').value = "";
+      document.getElementById('newUserConfigs').value = "";
+      document.getElementById('userProfileSelector').value = "";
+    };
+
+    window.deleteUser = async function(id) {
+      if(!confirm("Удалить пользователя навсегда?")) return;
+      await window.dbRefs.remove(window.dbRefs.ref(window.db, 'vpn_users/' + id));
+      showToast("Пользователь удален из системы", "success");
+    };
+
+    window.saveGlobalSettings = async function() {
+      const refSetting = window.dbRefs.ref(window.db, 'global_settings');
+      await window.dbRefs.set(refSetting, {
+        tgChannel: document.getElementById('adminTgField').value.trim()
+      });
+      showToast("Глобальные настройки обновлены", "success");
+    };
+
+    window.exitAdmin = function() {
+      document.getElementById('adminDashboard').classList.add('hidden');
+      document.getElementById('adminLoginCard').classList.remove('hidden');
+    };
+
+    window.refreshData = function() { window.location.reload(); };
+
+    window.copySubscriptionUrl = function() {
+      document.getElementById('subUrlField').select();
+      document.execCommand('copy');
+      showToast("Ссылка скопирована", "success");
+    };
+
+    window.copyRawConfigs = function() {
+      if (currentUserData && currentUserData.configs) {
+        const t = document.createElement("textarea");
+        t.value = currentUserData.configs.join('\n');
+        document.body.appendChild(t); t.select(); document.execCommand('copy'); document.body.removeChild(t);
+        showToast("Все конфигурации скопированы", "success");
+      }
+    };
+
+    window.toggleAdminView = function() {
+      document.getElementById('clientView').classList.toggle('hidden');
+      document.getElementById('adminView').classList.toggle('hidden');
+    };
+
+    function showToast(m, type) {
+      const c = document.getElementById('toastContainer');
+      const t = document.createElement('div');
+      t.className = `flex items-center gap-2 px-4 py-3 rounded-xl ${type === 'success' ? 'bg-emerald-600' : 'bg-red-600'} text-white text-xs font-bold shadow-xl transition-all duration-300`;
+      t.innerText = m; c.appendChild(t);
+      setTimeout(() => t.remove(), 3500);
+    }
+  </script>
+</body>
+</html>
