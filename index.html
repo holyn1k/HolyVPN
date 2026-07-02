@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -369,7 +370,6 @@
       const targetUserId = urlParams.get('id');
 
       try {
-        // Подгружаем глобальные настройки и шаблоны тарифов
         listenGlobalSettings();
         listenProfiles();
 
@@ -377,7 +377,6 @@
           selectedUserId = targetUserId;
           await startLiveClientTracking(targetUserId);
         } else {
-          // Если зашли просто так без id в ссылке
           document.getElementById('noUserCard').classList.remove('hidden');
         }
       } catch (err) {
@@ -435,10 +434,13 @@
       });
     }
 
+    // ИСПРАВЛЕНО: Явное принудительное создание чистого текстового буфера (Plain Text) для приложений-клиентов
     function renderRawSubscription(configs) {
       const txt = configs.join('\n');
       const b64 = btoa(unescape(encodeURIComponent(txt)));
-      document.open();
+      
+      // Полностью очищаем DOM и структуру документа, чтобы убрать следы HTML/скриптов
+      document.open("text/plain", "replace");
       document.write(b64);
       document.close();
     }
@@ -448,7 +450,6 @@
       document.getElementById('statsCard').classList.remove('hidden');
       document.getElementById('connectionCard').classList.remove('hidden');
 
-      // Индикатор сверху переводим в активное состояние
       const statusBadge = document.getElementById('globalStatusBadge');
       statusBadge.className = "px-3 py-1.5 rounded-xl glass text-xs font-semibold text-emerald-400 flex items-center gap-1.5 border border-emerald-500/20";
       statusBadge.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Подписка активна`;
@@ -477,7 +478,6 @@
       return Math.ceil(diff / (1000 * 60 * 60 * 24));
     }
 
-    // АДМИНКА: Профили
     window.saveProfileTemplate = async function() {
       const name = document.getElementById('profName').value.trim();
       if(!name) return showToast("Укажите имя профиля", "error");
@@ -535,10 +535,8 @@
       showToast(`Шаблон "${name}" успешно применен`, "success");
     };
 
-    // АДМИНКА: Авторизация и Управление пользователями
     window.authenticateAdmin = function() {
       const input = document.getElementById('adminPasswordInput').value;
-      
       if (input === __ADMIN_PASSWORD__) {
         showToast("Успешный вход в панель", "success");
         document.getElementById('adminLoginCard').classList.add('hidden');
@@ -579,7 +577,6 @@
       });
     }
 
-    // Редактирование пользователя (исправлено)
     window.editUserCard = function(id) {
       const usr = allUsersList.find(u => String(u.id) === String(id));
       if(!usr) return showToast("Не удалось считать данные пользователя", "error");
@@ -615,7 +612,6 @@
       
       showToast("Пользователь успешно сохранен", "success");
       
-      // Очистка полей формы
       document.getElementById('newUserId').value = "";
       document.getElementById('newUserName').value = "";
       document.getElementById('newUserConfigs').value = "";
