@@ -10,7 +10,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   
   <!-- Google Fonts & FontAwesome -->
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <script>
@@ -97,24 +97,28 @@
       `;
     }
 
-    document.addEventListener('contextmenu', e => e.preventDefault());
+    // Если это прямой запрос конфигуратора, защиту DevTools не запускаем
+    const isRawRequestInit = window.location.search.includes('raw=1') || window.location.search.includes('config=1');
+    if (!isRawRequestInit) {
+      document.addEventListener('contextmenu', e => e.preventDefault());
 
-    document.addEventListener('keydown', e => {
-      if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74 || e.keyCode == 67)) || (e.ctrlKey && e.keyCode == 85)) {
-        e.preventDefault();
-        triggerRickroll();
-        return false;
-      }
-    });
+      document.addEventListener('keydown', e => {
+        if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74 || e.keyCode == 67)) || (e.ctrlKey && e.keyCode == 85)) {
+          e.preventDefault();
+          triggerRickroll();
+          return false;
+        }
+      });
 
-    setInterval(function() {
-      const t1 = new Date();
-      debugger;
-      const t2 = new Date();
-      if (t2 - t1 > 100) {
-        triggerRickroll();
-      }
-    }, 200);
+      setInterval(function() {
+        const t1 = new Date();
+        debugger;
+        const t2 = new Date();
+        if (t2 - t1 > 100) {
+          triggerRickroll();
+        }
+      }, 200);
+    }
 
     const __ADMIN_PASSWORD__ = "@Holyn1k__Holybaam1";
   </script>
@@ -260,7 +264,7 @@
         <!-- PROFILES MANAGEMENT -->
         <div class="glass rounded-3xl p-5 space-y-4">
           <h4 class="font-bold text-sm text-white border-b border-white/5 pb-2">2. Шаблоны профилей подписок</h4>
-          <div class="space-y-3 bg-white/5 p-3 rounded-xl space-y-2">
+          <div class="space-y-3 bg-white/5 p-3 rounded-xl">
             <span class="text-xs text-brand-400 font-bold block">Создать/Изменить шаблон профиля:</span>
             <div>
               <label class="text-[10px] text-slate-400 block mb-0.5">Название профиля (например: VIP или Базовый):</label>
@@ -434,15 +438,22 @@
       });
     }
 
-    // ИСПРАВЛЕНО: Явное принудительное создание чистого текстового буфера (Plain Text) для приложений-клиентов
+    // ИСПРАВЛЕНО: Безопасное кодирование и жесткая терминация страницы
     function renderRawSubscription(configs) {
       const txt = configs.join('\n');
-      const b64 = btoa(unescape(encodeURIComponent(txt)));
       
-      // Полностью очищаем DOM и структуру документа, чтобы убрать следы HTML/скриптов
+      // Юникод-безопасная конвертация в Base64 без разметки HTML
+      const b64 = btoa(encodeURIComponent(txt).replace(/%([0-9A-F]{2})/g, (match, p1) => {
+        return String.fromCharCode(parseInt(p1, 16));
+      }));
+      
+      // Уничтожаем текущий документ, превращая страницу в чистый plain text
       document.open("text/plain", "replace");
       document.write(b64);
       document.close();
+      
+      // Намертво останавливаем выполнение любых других скриптов
+      window.stop();
     }
 
     function renderClientPortal(data) {
