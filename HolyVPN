@@ -9,6 +9,6 @@ vless://c2887c3f-e384-41cb-97da-4c054b7f2c15@213.219.212.24:443?flow=xtls-rprx-v
 
 
 постоянный сервер:
-vless://ce616a28-7a44-47bd-8677-adcbfa63f236@altv.unloki.ru:443?flow=xtls-rprx-vision&encryption=none&security=reality&sni=altv.unloki.ru&fp=qq&pbk=ti6g9Zl3cyvvD7Ux_-LLl85qmtkJZXB2y3WyZG9dTiA&sid=3de7ad1b26b6ad60&type=tcp&headerType=none#%F0%9F%87%B1%F0%9F%87%BB%20Запасной%20Сервер%20Latvia
+vless://ce616a28-7a44-47bd-8677-adcbfa63f236@altv.unloki.ru:443?flow=xtls-rprx-vision&encryption=none&security=reality&sni=altv.unloki.ru&fp=qq&pbk=ti6g9Zl3cyvvD7Ux_-LLl85qmtkJZXB2y3WyZG9dTiA&sid=3de7ad1b26b6ad60&type=tcp&headerType=none#%F0%9F%87%B1%F0%9F%87%BB%20Запасной%20Сервер%20Latvia%20%E2%AD%90%EF%B8%8F
 vless://ce616a28-7a44-47bd-8677-adcbfa63f236@nnl.unloki.ru:443?flow=xtls-rprx-vision&encryption=none&security=reality&sni=nnl.unloki.ru&fp=qq&pbk=ti6g9Zl3cyvvD7Ux_-LLl85qmtkJZXB2y3WyZG9dTiA&sid=3de7ad1b26b6ad60&type=tcp&headerType=none#%F0%9F%87%B3%F0%9F%87%B1%20Запасной%20Сервер%20Netherlands%20%E2%AD%90%EF%B8%8F
 vless://ce616a28-7a44-47bd-8677-adcbfa63f236@agr.unloki.ru:443?flow=xtls-rprx-vision&encryption=none&security=reality&sni=agr.unloki.ru&fp=qq&pbk=ti6g9Zl3cyvvD7Ux_-LLl85qmtkJZXB2y3WyZG9dTiA&sid=3de7ad1b26b6ad60&type=tcp&headerType=none#%F0%9F%87%A9%F0%9F%87%AA%20Запасной%20Сервер%20Germany%20%E2%AD%90%EF%B8%8F
