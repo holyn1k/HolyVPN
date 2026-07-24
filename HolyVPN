@@ -9,12 +9,10 @@ subscription-userinfo: upload=0; download=0; total=0; expire=0
 
 
 обычные серверы:
-vless://d9309895-ad92-4069-9464-d380aedf4a12@45.198.108.164:443?flow=xtls-rprx-vision&encryption=none&security=reality&sni=storage.yandex.net&fp=firefox&pbk=KYlgK96xPZJq10GbhF-BaCXRxXc9XzxzfICdooYvMlg&sid=d020b987f84eb78a&type=tcp&headerType=none#%F0%9F%87%AB%F0%9F%87%AE%20Finland
-trojan://IQ68037294@eager-louse.rooster465.autos:443?security=tls&sni=eager-louse.rooster465.autos&fp=chrome&type=tcp&headerType=none#%F0%9F%87%B3%F0%9F%87%B1%20Netherlands
+
 
 для глушилок:
 vless://391c4575-3195-4917-817c-f7f26fa7fe5b@82.202.177.145:5269?encryption=none&security=reality&sni=max.ru&fp=qq&pbk=dvue8xDyKMWNJELyMBrEYLy5SezehG_FOtDrDl-bVGQ&sid=9473acb8aaf08627&type=tcp&headerType=none#%F0%9F%87%B1%F0%9F%87%BB%20Latvia ⚡
-vless://86208db7-8bbc-42c2-9eb2-ffe5675502c3@feed.onetimeok.com:443?encryption=none&security=reality&sni=feed.onetimeok.com&fp=firefox&pbk=nhw3l7ERW8NoAh5lBv3dxkF-mkNYifxsSxX_HNiOhAU&sid=82674cbe556a1209&type=grpc&mode=gun&authority=&serviceName=app.v1.StreamService#%F0%9F%87%A9%F0%9F%87%AA%20Germany ⚡
 vless://391c4575-3195-4917-817c-f7f26fa7fe5b@82.202.177.145:5269?encryption=none&security=reality&sni=max.ru&fp=firefox&pbk=dvue8xDyKMWNJELyMBrEYLy5SezehG_FOtDrDl-bVGQ&sid=9473acb8aaf08627&type=tcp&headerType=none#%F0%9F%87%B7%F0%9F%87%BA%20Russia ⚡
 
 ультра быстрые:
