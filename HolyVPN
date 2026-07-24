@@ -9,13 +9,13 @@ subscription-userinfo: upload=0; download=0; total=0; expire=0
 
 
 обычные серверы:
-vless://f2e0c1d5-1e6d-4316-86da-ad4dbfb42af2@pro-se.emrata.top:443?encryption=none&security=reality&sni=pro-se.emrata.top&fp=firefox&pbk=AAZjVvbC7AwPKot_1ygO5VMpN7XYifCA7lG0RNR5sEk&type=tcp&headerType=none#%F0%9F%87%B8%F0%9F%87%AA%20%D0%A8%D0%B2%D0%B5%D1%86%D0%B8%D1%8F
-vless://f2e0c1d5-1e6d-4316-86da-ad4dbfb42af2@pro-fi.emrata.top:443?flow=xtls-rprx-vision&encryption=none&security=reality&sni=pro-fi.emrata.top&fp=firefox&pbk=F2VfBr2UmjDTErB_oruvW5aIvzH_xGfM2AW5_w-DF0I&type=tcp&headerType=none#%F0%9F%87%AB%F0%9F%87%AE%20%D0%A4%D0%B8%D0%BD%D0%BB%D1%8F%D0%BD%D0%B4%D0%B8%D1%8F
+vless://d9309895-ad92-4069-9464-d380aedf4a12@45.198.108.164:443?flow=xtls-rprx-vision&encryption=none&security=reality&sni=storage.yandex.net&fp=firefox&pbk=KYlgK96xPZJq10GbhF-BaCXRxXc9XzxzfICdooYvMlg&sid=d020b987f84eb78a&type=tcp&headerType=none#%F0%9F%87%AB%F0%9F%87%AE%20Finland
+trojan://IQ68037294@eager-louse.rooster465.autos:443?security=tls&sni=eager-louse.rooster465.autos&fp=chrome&type=tcp&headerType=none#%F0%9F%87%B3%F0%9F%87%B1%20Netherlands
 
 для глушилок:
 vless://391c4575-3195-4917-817c-f7f26fa7fe5b@82.202.177.145:5269?encryption=none&security=reality&sni=max.ru&fp=qq&pbk=dvue8xDyKMWNJELyMBrEYLy5SezehG_FOtDrDl-bVGQ&sid=9473acb8aaf08627&type=tcp&headerType=none#%F0%9F%87%B1%F0%9F%87%BB%20Latvia ⚡
-vless://30825d3e-675c-11f1-a103-aef63c7126b0@5.188.140.194:2053?encryption=none&security=reality&sni=hh.ru&fp=edge&pbk=WUY8Lb4LfUUKLzZK3oSlRAdoy-Iu0w3Ait1-jtxbW1M&sid=4b685844d0b4f724&type=grpc&mode=gun&authority=&serviceName=grpc-direct#%F0%9F%87%A9%F0%9F%87%AA%20Germany ⚡
+vless://86208db7-8bbc-42c2-9eb2-ffe5675502c3@feed.onetimeok.com:443?encryption=none&security=reality&sni=feed.onetimeok.com&fp=firefox&pbk=nhw3l7ERW8NoAh5lBv3dxkF-mkNYifxsSxX_HNiOhAU&sid=82674cbe556a1209&type=grpc&mode=gun&authority=&serviceName=app.v1.StreamService#%F0%9F%87%A9%F0%9F%87%AA%20Germany ⚡
 vless://391c4575-3195-4917-817c-f7f26fa7fe5b@82.202.177.145:5269?encryption=none&security=reality&sni=max.ru&fp=firefox&pbk=dvue8xDyKMWNJELyMBrEYLy5SezehG_FOtDrDl-bVGQ&sid=9473acb8aaf08627&type=tcp&headerType=none#%F0%9F%87%B7%F0%9F%87%BA%20Russia ⚡
 
 ультра быстрые:
-vless://391c4575-3195-4917-817c-f7f26fa7fe5b@151.236.114.245:6443?encryption=none&security=reality&sni=max.ru&fp=qq&pbk=wfQg9xng5NedWJBv6hwvCkRqsafJnRuhCZWHgko6yUs&sid=3142c760d3c88811&type=tcp&headerType=none#%F0%9F%87%B1%F0%9F%87%BB%20%D0%9B%D0%B0%D1%82%D0%B2%D0%B8%D1%8F%20%7C%20%F0%9F%8C%90
+
