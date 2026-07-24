@@ -10,7 +10,7 @@ subscription-userinfo: upload=0; download=0; total=0; expire=0
 
 обычные серверы:
 vless://5dc15e15-f285-4a9d-959b-0e4fbdd77b63@cf.008500.xyz:443?encryption=none&security=tls&sni=powered-by-surena.configfarsi695fcfe8a2e58.workers.dev&fp=chrome&type=ws&host=powered-by-surena.configfarsi695fcfe8a2e58.workers.dev&path=%2F#%F0%9F%87%BA%F0%9F%87%B8%20US
-vless://183f5a5f-8cb9-4f39-8bff-53b601d69a50@de-fra-ncp-55.marketing-hub.net:443?encryption=none&security=reality&type=tcp&fp=firefox&pbk=SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc&sni=jobinvest.ru&flow=xtls-rprx-vision#%F0%9F%87%A9%F0%9F%87%AE%20Germany
+vless://183f5a5f-8cb9-4f39-8bff-53b601d69a50@de-fra-ncp-55.marketing-hub.net:50051?encryption=none&security=reality&type=grpc&fp=firefox&pbk=SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc&sni=jobinvest.ru&sid=cd1dd1e4a801f54b&spx=%2F#%F0%9F%87%A9%F0%9F%87%AE%20Germany
 
 для глушилок:
 vless://391c4575-3195-4917-817c-f7f26fa7fe5b@82.202.177.145:5269?encryption=none&security=reality&sni=max.ru&fp=qq&pbk=dvue8xDyKMWNJELyMBrEYLy5SezehG_FOtDrDl-bVGQ&sid=9473acb8aaf08627&type=tcp&headerType=none#%F0%9F%87%B1%F0%9F%87%BB%20Latvia ⚡
