@@ -1,0 +1,266 @@
+{
+  "log": {
+    "access": "",
+    "error": "",
+    "loglevel": "warning"
+  },
+  "dns": {
+    "servers": [
+      "https://8.8.8.8/dns-query",
+      "https://1.1.1.1/dns-query",
+      "https+local://8.8.8.8/dns-query",
+      "https+local://1.1.1.1/dns-query"
+    ],
+    "queryStrategy": "UseIPv4"
+  },
+  "inbounds": [
+    {
+      "listen": "127.0.0.1",
+      "port": 10808,
+      "protocol": "socks",
+      "settings": {
+        "auth": "noauth",
+        "udp": true
+      },
+      "sniffing": {
+        "destOverride": [
+          "http",
+          "quic",
+          "tls"
+        ],
+        "enabled": true,
+        "excludedDomains": [],
+        "metadataOnly": false,
+        "routeOnly": true
+      },
+      "tag": "socks-in"
+    },
+    {
+      "listen": "127.0.0.1",
+      "port": 10809,
+      "protocol": "http",
+      "settings": {
+        "auth": "noauth",
+        "udp": true
+      },
+      "sniffing": {
+        "destOverride": [
+          "http",
+          "quic",
+          "tls"
+        ],
+        "enabled": true,
+        "excludedDomains": [],
+        "metadataOnly": false,
+        "routeOnly": true
+      },
+      "tag": "http"
+    }
+  ],
+  "outbounds": [
+    {
+      "tag": "de-tcp-1",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "de-fra-ncp-55.marketing-hub.net",
+            "port": 443,
+            "users": [
+              {
+                "id": "183f5a5f-8cb9-4f39-8bff-53b601d69a50",
+                "security": "auto",
+                "encryption": "none",
+                "flow": "xtls-rprx-vision"
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "reality",
+        "realitySettings": {
+          "serverName": "jobinvest.ru",
+          "fingerprint": "firefox",
+          "publicKey": "SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc"
+        }
+      }
+    },
+    {
+      "tag": "de-grpc-1",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "de-fra-ncp-55.marketing-hub.net",
+            "port": 50051,
+            "users": [
+              {
+                "encryption": "none",
+                "flow": "",
+                "id": "183f5a5f-8cb9-4f39-8bff-53b601d69a50"
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "grpc",
+        "security": "reality",
+        "realitySettings": {
+          "serverName": "jobinvest.ru",
+          "fingerprint": "firefox",
+          "publicKey": "SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc",
+          "shortId": "cd1dd1e4a801f54b"
+        }
+      }
+    },
+    {
+      "tag": "us-tcp-1",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "us-man-ncp-10.marketing-hub.net",
+            "port": 443,
+            "users": [
+              {
+                "id": "183f5a5f-8cb9-4f39-8bff-53b601d69a50",
+                "security": "auto",
+                "encryption": "none",
+                "flow": "xtls-rprx-vision"
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "reality",
+        "realitySettings": {
+          "serverName": "jobinvest.ru",
+          "fingerprint": "firefox",
+          "publicKey": "SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc"
+        }
+      }
+    },
+    {
+      "tag": "us-grpc-1",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "us-man-ncp-10.marketing-hub.net",
+            "port": 50051,
+            "users": [
+              {
+                "encryption": "none",
+                "flow": "",
+                "id": "183f5a5f-8cb9-4f39-8bff-53b601d69a50"
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "grpc",
+        "security": "reality",
+        "realitySettings": {
+          "serverName": "jobinvest.ru",
+          "fingerprint": "firefox",
+          "publicKey": "SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc",
+          "shortId": "cd1dd1e4a801f54b"
+        }
+      }
+    },
+    {
+      "tag": "fi-xhttp-1",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "45.144.53.53",
+            "port": 8443,
+            "users": [
+              {
+                "id": "5e7d5298-7641-4a96-98d8-7ec56a718db5",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "xhttpSettings": {
+          "mode": "auto",
+          "path": "/api/v2/sync"
+        },
+        "security": "reality",
+        "realitySettings": {
+          "serverName": "www.tradingview.com",
+          "publicKey": "EGxJpl6UtxBovvg0-E9utvD3VvEIVYwBtRN8yy8enUs",
+          "shortId": "f1a84d63b20e7c95",
+          "fingerprint": "safari"
+        },
+        "sockopt": {
+          "dialerProxy": "fragment"
+        }
+      }
+    },
+    {
+      "protocol": "freedom",
+      "tag": "direct"
+    },
+    {
+      "protocol": "blackhole",
+      "tag": "block"
+    },
+    {
+      "tag": "fragment",
+      "protocol": "freedom",
+      "settings": {
+        "fragment": {
+          "length": "100-200",
+          "packets": "tlshello",
+          "interval": "10-20"
+        }
+      }
+    }
+  ],
+  "routing": {
+    "domainStrategy": "IPIfNonMatch",
+    "rules": [
+      {
+        "ip": [
+          "127.0.0.0/8",
+          "10.0.0.0/8",
+          "172.16.0.0/12",
+          "192.168.0.0/16",
+          "::1/128"
+        ],
+        "type": "field",
+        "outboundTag": "direct"
+      },
+      {
+        "domain": [
+          "geosite:category-gov-ru",
+          "domain:gosuslugi.ru",
+          "domain:sberbank.ru",
+          "domain:tinkoff.ru",
+          "domain:vk.com",
+          "domain:yandex.ru"
+        ],
+        "outboundTag": "direct"
+      },
+      {
+        "type": "field",
+        "network": "tcp,udp",
+        "outboundTag": "de-tcp-1"
+      }
+    ]
+  },
+  "remarks": "🚀 Multi-VPN Hub (DE, US, FI)"
+}
