@@ -5,7 +5,6 @@ profile-web-page-url:
 #announce: VPN для белых списков 🏳
 subscription-userinfo: upload=0; download=0; total=0; expire=0
 
-
 vless://5e7d5298-7641-4a96-98d8-7ec56a718db5@api.pushbyte.cc:443?encryption=none&security=tls&type=xhttp&host=api.pushbyte.cc&path=%2Fapi%2Fv2%2F&fp=edge#🇷🇺 БЕЛЫЕ СПИСКИ 1
 vless://5e7d5298-7641-4a96-98d8-7ec56a718db5@api.datapull.cc:443?encryption=none&security=tls&type=xhttp&host=api.datapull.cc&path=%2Fapi%2Fv2%2F&fp=edge#🇷🇺 БЕЛЫЕ СПИСКИ 2
 vless://5e7d5298-7641-4a96-98d8-7ec56a718db5@45.151.101.194:443?encryption=none&security=reality&type=xhttp&path=%2Fapi%2Fv2%2Fsync&sni=www.kaspersky.ru&fp=edge&pbk=nmdu3rhLXUr8KzGtN_0D4Zc5JS1V8t9S4_iDXvtWk2I&sid=6bf03e9d7a1c8524#🇷🇺 Moscow
