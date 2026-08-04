@@ -2,16 +2,7 @@
 #profile-update-interval: 24
 support-url: https://
 profile-web-page-url:
-#announce: VPN для белых списков 🏳
+#announce: Пишите Никите в Max, он объяснит как настроить ван для белых списков
 subscription-userinfo: upload=0; download=0; total=0; expire=0
 
-vless://5e7d5298-7641-4a96-98d8-7ec56a718db5@api.pushbyte.cc:443?encryption=none&security=tls&type=xhttp&host=api.pushbyte.cc&path=%2Fapi%2Fv2%2F&fp=edge#🇷🇺 БЕЛЫЕ СПИСКИ 1
-vless://5e7d5298-7641-4a96-98d8-7ec56a718db5@api.datapull.cc:443?encryption=none&security=tls&type=xhttp&host=api.datapull.cc&path=%2Fapi%2Fv2%2F&fp=edge#🇷🇺 БЕЛЫЕ СПИСКИ 2
-vless://5e7d5298-7641-4a96-98d8-7ec56a718db5@45.151.101.194:443?encryption=none&security=reality&type=xhttp&path=%2Fapi%2Fv2%2Fsync&sni=www.kaspersky.ru&fp=edge&pbk=nmdu3rhLXUr8KzGtN_0D4Zc5JS1V8t9S4_iDXvtWk2I&sid=6bf03e9d7a1c8524#🇷🇺 Moscow
-vless://5e7d5298-7641-4a96-98d8-7ec56a718db5@45.144.53.53:8443?encryption=none&security=reality&type=xhttp&path=%2Fapi%2Fv2%2Fsync&sni=www.tradingview.com&fp=safari&pbk=EGxJpl6UtxBovvg0-E9utvD3VvEIVYwBtRN8yy8enUs&sid=f1a84d63b20e7c95#🇫🇮 Finland
-vless://5e7d5298-7641-4a96-98d8-7ec56a718db5@205.237.104.27:8443?encryption=none&security=reality&type=xhttp&path=%2Fapi%2Fv2%2Fsync&sni=www.tradingview.com&fp=edge&pbk=uYlJKmVHsSuCk-T9Y4CpqyR2LIP9etRZkRmDEt8-fUs&sid=2a75501193cb97c0#🇫🇷 France
-vless://5e7d5298-7641-4a96-98d8-7ec56a718db5@188.214.129.163:8443?encryption=none&security=reality&type=xhttp&path=%2Fapi%2Fv2%2Fsync&sni=www.tradingview.com&fp=edge&pbk=NnDloDdLzhLM1CVF36kbOkc0JFzsqVaT3k1fYX_vXRY&sid=58ae8cd85cc31074#🇱🇹 Lithuania
-vless://5e7d5298-7641-4a96-98d8-7ec56a718db5@138.124.102.159:8443?encryption=none&security=reality&type=xhttp&path=%2Fapi%2Fv2%2Fsync&sni=www.tradingview.com&fp=edge&pbk=EGxJpl6UtxBovvg0-E9utvD3VvEIVYwBtRN8yy8enUs&sid=c4a1e83b6f27d590#🇸🇪 Sweden
-vless://5e7d5298-7641-4a96-98d8-7ec56a718db5@89.124.71.181:8443?encryption=none&security=reality&type=xhttp&path=%2Fapi%2Fv2%2Fsync&sni=www.tradingview.com&fp=edge&pbk=EGxJpl6UtxBovvg0-E9utvD3VvEIVYwBtRN8yy8enUs&sid=a3f7b2e91c8d4056#🇳🇱 Netherlands
-vless://183f5a5f-8cb9-4f39-8bff-53b601d69a50@de-fra-ncp-55.marketing-hub.net:443?encryption=none&security=reality&type=tcp&flow=xtls-rprx-vision&sni=jobinvest.ru&fp=firefox&pbk=SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc#🇩🇪 Германия
-vless://183f5a5f-8cb9-4f39-8bff-53b601d69a50@us-man-ncp-10.marketing-hub.net:443?encryption=none&security=reality&type=tcp&flow=xtls-rprx-vision&sni=jobinvest.ru&fp=firefox&pbk=SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc#🇺🇸 США
+vless://00000000-0000-0000-0000-000000000000@127.0.0.1:443?flow=xtls-rprx-vision&encryption=none&security=reality&sni=google.com&fp=chrome&pbk=NOT_A_VALID_PUBLIC_KEY_FOR_TESTS_ONLY&allowinsecure=0&type=tcp&headerType=none#Технический Перерыв 🚧
