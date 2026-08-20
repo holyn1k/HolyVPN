@@ -5,12 +5,11 @@ profile-web-page-url:
 #announce: Если интернет не работает, включайте сервера с российскими флагами
 subscription-userinfo: upload=0; download=0; total=0; expire=0
 
-vless://5e7d5298-7641-4a96-98d8-7ec56a718db5@api.datapull.cc:443?type=xhttp&security=tls&sni=api.datapull.cc&fp=edge&alpn=h2,http/1.1&path=/api/v2/&mode=packet-up&host=api.datapull.cc#🇷🇺 БЕЛЫЕ СПИСКИ 1
-vless://5e7d5298-7641-4a96-98d8-7ec56a718db5@api.pushbyte.cc:443?type=xhttp&security=tls&sni=api.pushbyte.cc&fp=edge&alpn=h2,http/1.1&path=/api/v2/&mode=packet-up&host=api.pushbyte.cc#🇷🇺 БЕЛЫЕ СПИСКИ 2
-vless://5e7d5298-7641-4a96-98d8-7ec56a718db5@api.pushbyte.cc:443?type=xhttp&security=tls&sni=api.pushbyte.cc&fp=edge&alpn=h2,http/1.1&path=/api/v2/&mode=packet-up&host=api.pushbyte.cc#🇷🇺 БЕЛЫЕ СПИСКИ 3
-vless://5e7d5298-7641-4a96-98d8-7ec56a718db5@45.144.53.53:8443?type=xhttp&security=reality&sni=www.tradingview.com&pbk=EGxJpl6UtxBovvg0-E9utvD3VvEIVYwBtRN8yy8enUs&sid=f1a84d63b20e7c95&fp=safari&path=/api/v2/sync&mode=auto#🇫🇮 Finland
-vless://5e7d5298-7641-4a96-98d8-7ec56a718db5@89.124.71.181:8443?type=xhttp&security=reality&sni=www.tradingview.com&pbk=EGxJpl6UtxBovvg0-E9utvD3VvEIVYwBtRN8yy8enUs&sid=a3f7b2e91c8d4056&fp=edge&path=/api/v2/sync&mode=auto#🇳🇱 Netherlands
-vless://5e7d5298-7641-4a96-98d8-7ec56a718db5@188.214.129.163:8443?type=xhttp&security=reality&sni=www.tradingview.com&pbk=NnDloDdLzhLM1CVF36kbOkc0JFzsqVaT3k1fYX_vXRY&sid=58ae8cd85cc31074&fp=edge&path=/api/v2/sync&mode=auto#🇱🇹 Lithuania
+
+vless://77777777-8a3e-6666-b6d1-a9c5f0e8b3a2@104.18.42.54:2087?type=ws&security=tls&fp=chrome&sni=faxf32gkfzoxqv.fx6hsv0.ccwu.cc&path=%2F&host=faxf32gkfzoxqv.fx6hsv0.ccwu.cc#🇺🇸 [белые списки] США
+
+
+
 vless://183f5a5f-8cb9-4f39-8bff-53b601d69a50@de-fra-ncp-55.marketing-hub.net:443?type=tcp&security=reality&sni=jobinvest.ru&pbk=SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc&fp=firefox&flow=xtls-rprx-vision#🇩🇪 Germany (TCP)
 vless://183f5a5f-8cb9-4f39-8bff-53b601d69a50@de-fra-ncp-55.marketing-hub.net:50051?type=grpc&security=reality&sni=jobinvest.ru&pbk=SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc&sid=cd1dd1e4a801f54b&fp=firefox#🇩🇪 Germany (gRPC)
 vless://183f5a5f-8cb9-4f39-8bff-53b601d69a50@us-man-ncp-10.marketing-hub.net:443?type=tcp&security=reality&sni=jobinvest.ru&pbk=SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc&fp=firefox&flow=xtls-rprx-vision#🇺🇸 USA (TCP)
