@@ -2,7 +2,7 @@
 #profile-update-interval: 24
 support-url: https://
 profile-web-page-url:
-#announce: Если интернет не работает, включайте сервера Белых списков
+#announce: Если интернет не работает, включайте сервера Белых списков 🏳. ⚡ — быстрые сервера
 subscription-userinfo: upload=0; download=0; total=0; expire=0
 
 
@@ -13,10 +13,16 @@ vless://183f5a5f-8cb9-4f39-8bff-53b601d69a50@bridge.marketing-hub.net:443?encryp
 
 vless://183f5a5f-8cb9-4f39-8bff-53b601d69a50@us-man-ncp-02.marketing-hub.net:443?encryption=none&flow=xtls-rprx-vision&security=reality&sni=jobinvest.ru&fp=firefox&pbk=SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc&type=tcp&headerType=none#🇺🇸 США
 
-vless://f2bdd02a-2fa5-4cd4-bb70-bc1793be9e9a@ndc.l-solutions.cc:443?encryption=none&flow=&security=tls&sni=ndc.l-solutions.cc&fp=chrome&alpn=h2,http/1.1&type=xhttp&mode=packet-up&path=%2Fapi%2FuploadFile%2F&host=ndc.l-solutions.cc&xPaddingKey=_dc&xPaddingHeader=X-Cache&xPaddingMethod=tokenish&uplinkHTTPMethod=GET&scMaxEachPostBytes=524288&scMaxConcurrentPosts=1&scMinPostsIntervalMs=150#🇳🇱 Белые Списки 2
+vless://f2bdd02a-2fa5-4cd4-bb70-bc1793be9e9a@ndc.l-solutions.cc:443?encryption=none&flow=&security=tls&sni=ndc.l-solutions.cc&fp=chrome&alpn=h2,http/1.1&type=xhttp&mode=packet-up&path=%2Fapi%2FuploadFile%2F&host=ndc.l-solutions.cc&xPaddingKey=_dc&xPaddingHeader=X-Cache&xPaddingMethod=tokenish&uplinkHTTPMethod=GET&scMaxEachPostBytes=524288&scMaxConcurrentPosts=1&scMinPostsIntervalMs=150#🇳🇱 Белые Списки 2 🏳
 
-vless://f2bdd02a-2fa5-4cd4-bb70-bc1793be9e9a@37.9.4.187:443?encryption=none&flow=xtls-rprx-vision&security=reality&sni=&fp=chrome&pbk=ti6g9Zl3cyvvD7Ux_-LLl85qmtkJZXB2y3WyZG9dTiA&sid=3de7ad1b26b6ad60&type=tcp&headerType=none#🇩🇪 Белые Списки 1
+vless://f2bdd02a-2fa5-4cd4-bb70-bc1793be9e9a@37.9.4.187:443?encryption=none&flow=xtls-rprx-vision&security=reality&sni=&fp=chrome&pbk=ti6g9Zl3cyvvD7Ux_-LLl85qmtkJZXB2y3WyZG9dTiA&sid=3de7ad1b26b6ad60&type=tcp&headerType=none#🇩🇪 Белые Списки 1 🏳
 
-vless://0c6342a7-ad96-4995-939a-312d90ad0477@46.8.208.70:9443?encryption=none&flow=xtls-rprx-vision&security=reality&sni=www.cloudflare.com&fp=chrome&pbk=nlSTIZeziCL_gR8HN1UF4F_Gbcrqr4Z9pr_sM6dGbig&sid=c303fd64bf463450&type=tcp&headerType=none#🇷🇺 Белые Списки 3
+hysteria2://0c6342a7-ad96-4995-939a-312d90ad0477@194.48.250.234:443?insecure=0&sni=mol.ultimagamest.com&alpn=h3&up=2000&down=2000&fingerprint=firefox#🇪🇺 Быстрый Сервер ⚡
 
-hysteria2://0c6342a7-ad96-4995-939a-312d90ad0477@194.48.250.234:443?insecure=0&sni=mol.ultimagamest.com&alpn=h3&up=2000&down=2000&fingerprint=firefox#🇪🇺 Быстрый Сервер
+hysteria2://90f0329c-a770-494e-b2d3-c929db2539c4@tr.i-love-russia.online:443?insecure=0&sni=tr.i-love-russia.online&alpn=h3&fingerprint=firefox#🇪🇪 История ⚡
+
+vless://90f0329c-a770-494e-b2d3-c929db2539c4@de.i-love-russia.online:443?encryption=none&flow=xtls-rprx-vision&security=reality&sni=de.i-love-russia.online&fp=firefox&pbk=Tm50a8xPW6cazNhgmTSHNbVfqaplvNSx0BQoJCGe3jU&sid=4aa753c327e7fd94&spx=%2F&type=tcp&headerType=none#🇫🇮 Финляндия ⚡
+
+hysteria2://0c6342a7-ad96-4995-939a-312d90ad0477@194.48.250.234:443?insecure=0&sni=mol.ultimagamest.com&alpn=h3&up=2000&down=2000&fingerprint=chrome#🇩🇪 Германия ⚡
+
+hysteria2://0c6342a7-ad96-4995-939a-312d90ad0477@2.26.148.126:443?insecure=0&sni=mol.ultimagamest.com&alpn=h3&up=2000&down=2000&fingerprint=firefox#🇵🇱 Польша ⚡
