@@ -2,7 +2,7 @@
 #profile-update-interval: 24
 support-url: https://
 profile-web-page-url:
-#announce: Работает при белых списках 😉. 🏳 - белые списки
+#announce: ЗАВТРА ВАМ НУЖНО БУДЕТ ОБНОВИТЬ ЭТОТ ВПН!!! СКОРО КРУПНОЕ ОБНОВЛЕНИЕ ⚠️ 
 subscription-userinfo: upload=0; download=0; total=0; expire=0
 
 
@@ -10,11 +10,11 @@ subscription-userinfo: upload=0; download=0; total=0; expire=0
 
 
 
-vless://27e128cc-8a4e-41bb-a1ee-4114baf259e8@23.134.76.200:443?encryption=none&flow=xtls-rprx-vision&security=reality&sni=www.gstatic.com&fp=firefox&pbk=z2WDw3VCKKcoW6-uX8tFjpWnZ_s4ho9h4VbXJVHDqVY&sid=37fac1a2&type=tcp#%F0%9F%87%BA%F0%9F%87%B8%20%E2%9A%A1%EF%B8%8F%20%D0%A1%D0%A8%D0%90
+hysteria2://0c6342a7-ad96-4995-939a-312d90ad0477@153.76.190.15:443/?sni=crt.onecloudstream.com&alpn=h3&insecure=0#🇳🇱Нидерланды
 
-vless://27e128cc-8a4e-41bb-a1ee-4114baf259e8@cdn-ya-ee.syncweb.top:443?encryption=none&security=tls&sni=cdn-ya-ee.syncweb.top&alpn=h2%2Chttp%2F1.1&fp=chrome&type=xhttp&mode=packet-up&host=cdn-ya-ee.syncweb.top&path=%2Fpoll%2F#%F0%9F%87%AA%F0%9F%87%AA%20%D0%9E%D0%B1%D1%85%D0%BE%D0%B4%20LTE%20-%20%D0%AD%D1%81%D1%82%D0%BE%D0%BD%D0%B8%D1%8F%20%E2%9A%A1%EF%B8%8F
+vless://183f5a5f-8cb9-4f39-8bff-53b601d69a50@us-tube-01.code7.shop:443?security=reality&sni=files-hub.org&fp=firefox&pbk=SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc&flow=xtls-rprx-vision&type=tcp#🇺🇸США
 
+vless://183f5a5f-8cb9-4f39-8bff-53b601d69a50@bridge.marketing-hub.net:443?security=reality&sni=files-hub.org&fp=firefox&pbk=SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc&flow=xtls-rprx-vision&type=tcp#🇩🇪Германия
 
-vless://27e128cc-8a4e-41bb-a1ee-4114baf259e8@de2.syncedge.net:443?encryption=none&flow=xtls-rprx-vision&security=reality&sni=de2.syncedge.net&fp=qq&pbk=z2WDw3VCKKcoW6-uX8tFjpWnZ_s4ho9h4VbXJVHDqVY&sid=37fac1a2&type=tcp#%F0%9F%87%A9%F0%9F%87%AA%20%F0%9F%9A%80%20%D0%93%D0%B5%D1%80%D0%BC%D0%B0%D0%BD%D0%B8%D1%8F%20%231
-
-hy2://27e128cc-8a4e-41bb-a1ee-4114baf259e8@de5.syncedge.net:443?sni=de5.syncedge.net&alpn=h3#%F0%9F%87%A9%F0%9F%87%AA%20%F0%9F%9A%80%20%D0%93%D0%B5%D1%80%D0%BC%D0%B0%D0%BD%D0%B8%D1%8F%20%232
+vless://00000000-0000-0000-0000-000000000000@127.0.0.1:443?flow=xtls-rprx-vision&encryption=none&security=reality&sni=google.com&fp=chrome&pbk=NOT_A_VALID_PUBLIC_KEY_FOR_TESTS_ONLY&allowinsecure=0&type=tcp&headerType=none#Скиньтесь на сухарики
+vless://00000000-0000-0000-0000-000000000000@127.0.0.1:443?flow=xtls-rprx-vision&encryption=none&security=reality&sni=google.com&fp=chrome&pbk=NOT_A_VALID_PUBLIC_KEY_FOR_TESTS_ONLY&allowinsecure=0&type=tcp&headerType=none#По 50-100 рублей
