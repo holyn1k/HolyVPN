@@ -62,7 +62,7 @@
   ],
   "outbounds": [
     {
-      "tag": "🇪🇪 Обход LTE - Эстония ⚡️",
+      "tag": "🇪🇺 Обход LTE - УЛЬТРА ⚡️",
       "protocol": "vless",
       "settings": {
         "vnext": [
