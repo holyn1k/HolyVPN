@@ -10,6 +10,10 @@ subscription-userinfo: upload=0; download=0; total=0; expire=0
 
 
 
-vless://90f0329c-a770-494e-b2d3-c929db2539c4@qbszmq.ilovecats.space:443?security=reality&sni=qbszmq.ilovecats.space&fp=firefox&pbk=2hifBY7pUdLKNf0MvJSV-EqjTN-sAocJu0kwGBXPdnA&sid=da64f68c3ff551b7&flow=xtls-rprx-vision&type=tcp#🇩🇪Германия
+vless://3184fe15-de32-4e49-b575-9d27b5c465ce@cdn-ya-ee.syncweb.top:443?security=tls&sni=cdn-ya-ee.syncweb.top&alpn=h2%2Chttp%2F1.1&fp=chrome&type=xhttp&mode=packet-up&host=cdn-ya-ee.syncweb.top&path=%2Fpoll%2F#🇪🇪 Обход Эстония
 
-hysteria2://90f0329c-a770-494e-b2d3-c929db2539c4@cl6tqh.ilovecats.space:443/?sni=cl6tqh.ilovecats.space&alpn=h3&insecure=0#🇵🇱Польша
+vless://3184fe15-de32-4e49-b575-9d27b5c465ce@cdn-ya2.syncweb.top:443?security=tls&sni=cdn-ya2.syncweb.top&alpn=h2%2Chttp%2F1.1&fp=chrome&type=xhttp&mode=packet-up&host=cdn-ya2.syncweb.top&path=%2Fpoll%2F#🇩🇪 Обход Германия
+
+vless://3184fe15-de32-4e49-b575-9d27b5c465ce@cdn-ya-ru2.syncweb.top:443?security=tls&sni=cdn-ya-ru2.syncweb.top&alpn=h2%2Chttp%2F1.1&fp=chrome&type=xhttp&mode=packet-up&host=cdn-ya-ru2.syncweb.top&path=%2Fpoll%2F#🇷🇺 Обход Россия
+
+vless://3184fe15-de32-4e49-b575-9d27b5c465ce@a6.syncsync.top:443?security=tls&sni=a6.syncsync.top&alpn=h2%2Chttp%2F1.1&fp=chrome&type=xhttp&mode=packet-up&host=a6.syncsync.top&path=%2Fpoll%2F#🇵🇱 Обход Польша
