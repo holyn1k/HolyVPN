@@ -10,20 +10,9 @@
   "dns": {
     "servers": [
       "https://8.8.8.8/dns-query",
-      "https://8.8.4.4/dns-query",
-      {
-        "address": "localhost",
-        "domains": [
-          "full:cdn-ya-ee.syncweb.top",
-          "full:cdn-ya2.syncweb.top",
-          "full:ee5.syncedge.net",
-          "full:de5.syncedge.net"
-        ],
-        "skipFallback": true
-      }
+      "https://8.8.4.4/dns-query"
     ],
-    "queryStrategy": "UseIPv4",
-    "disableFallbackIfMatch": true
+    "queryStrategy": "UseIPv4"
   },
   "inbounds": [
     {
@@ -334,13 +323,13 @@
     "subjectSelector": [
       "proxy-"
     ],
-    "probeURL": "https://www.gstatic.com/generate_204",
-    "probeInterval": "15s",
+    "probeURL": "http://cp.cloudflare.com/generate_204",
+    "probeInterval": "5s",
     "enableConcurrency": true
   },
   "routing": {
     "domainMatcher": "hybrid",
-    "domainStrategy": "IPIfNonMatch",
+    "domainStrategy": "AsIs",
     "balancers": [
       {
         "tag": "auto-balancer",
