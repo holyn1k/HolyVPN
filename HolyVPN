@@ -9,23 +9,21 @@
   },
   "dns": {
     "servers": [
-      "https:\/\/8.8.8.8\/dns-query",
-      "https:\/\/8.8.4.4\/dns-query",
+      "https://8.8.8.8/dns-query",
+      "https://8.8.4.4/dns-query",
       {
         "address": "localhost",
         "domains": [
-          "full:pl8.syncedge.net",
+          "full:cdn-ya-ee.syncweb.top",
+          "full:cdn-ya2.syncweb.top",
           "full:ee5.syncedge.net",
-          "full:de8.syncedge.net",
-          "full:a6.syncsync.top",
-          "full:cdn-ya-ee.syncweb.top"
+          "full:de5.syncedge.net"
         ],
         "skipFallback": true
       }
     ],
     "queryStrategy": "UseIPv4",
-    "disableFallbackIfMatch": true,
-    "tag": "auto-dns"
+    "disableFallbackIfMatch": true
   },
   "inbounds": [
     {
@@ -42,7 +40,8 @@
         "routeOnly": true,
         "destOverride": [
           "http",
-          "tls"
+          "tls",
+          "quic"
         ]
       }
     },
@@ -59,69 +58,15 @@
         "routeOnly": true,
         "destOverride": [
           "http",
-          "tls"
+          "tls",
+          "quic"
         ]
       }
     }
   ],
   "outbounds": [
     {
-      "tag": "proxy-1",
-      "protocol": "hysteria",
-      "settings": {
-        "address": "pl8.syncedge.net",
-        "port": 443,
-        "version": 2
-      },
-      "streamSettings": {
-        "network": "hysteria",
-        "hysteriaSettings": {
-          "version": 2,
-          "auth": "f26e6b01-8076-4b6a-8203-c669cb3dd9fe"
-        },
-        "security": "tls",
-        "tlsSettings": {
-          "serverName": "pl8.syncedge.net",
-          "enableSessionResumption": false,
-          "fingerprint": "firefox",
-          "alpn": [
-            "h3"
-          ]
-        },
-        "finalmask": {
-          "udp": [
-            {
-              "type": "noise",
-              "settings": {
-                "noise": [
-                  {
-                    "type": "hex",
-                    "delay": "100",
-                    "packet": "010000019a2b3c4d5e00ffff00fefefefefdfdfdfd123456783f5a1c08d9e24b76"
-                  }
-                ],
-                "reset": "1-2"
-              }
-            }
-          ],
-          "quicParams": {
-            "bbrProfile": "aggressive",
-            "congestion": "bbr",
-            "debug": false,
-            "initStreamReceiveWindow": 2097152,
-            "maxStreamReceiveWindow": 8388608,
-            "initConnectionReceiveWindow": 5242880,
-            "maxConnectionReceiveWindow": 20971520,
-            "maxIdleTimeout": 120
-          }
-        },
-        "sockopt": {
-          "tcpUserTimeout": 10000
-        }
-      }
-    },
-    {
-      "tag": "proxy-2",
+      "tag": "proxy-hy2-ee",
       "protocol": "hysteria",
       "settings": {
         "address": "ee5.syncedge.net",
@@ -169,131 +114,63 @@
             "maxConnectionReceiveWindow": 20971520,
             "maxIdleTimeout": 120
           }
-        },
-        "sockopt": {
-          "tcpUserTimeout": 10000
         }
       }
     },
     {
-      "tag": "proxy-3",
-      "protocol": "vless",
+      "tag": "proxy-hy2-de",
+      "protocol": "hysteria",
       "settings": {
-        "vnext": [
-          {
-            "address": "de8.syncedge.net",
-            "port": 443,
-            "users": [
-              {
-                "id": "f26e6b01-8076-4b6a-8203-c669cb3dd9fe",
-                "encryption": "none",
-                "flow": "xtls-rprx-vision"
-              }
-            ]
-          }
-        ]
+        "address": "de5.syncedge.net",
+        "port": 443,
+        "version": 2
       },
       "streamSettings": {
-        "network": "tcp",
-        "tcpSettings": {},
-        "security": "reality",
-        "realitySettings": {
-          "serverName": "0.0.0.0",
-          "publicKey": "l7rsbK271-Dhzfc9lvLaezBdEYu55QJlobvl6aqk6i8",
-          "shortId": "77574c5e5e6d807d",
-          "fingerprint": "edge"
-        },
-        "sockopt": {
-          "tcpUserTimeout": 10000
-        }
-      }
-    },
-    {
-      "tag": "direct",
-      "protocol": "freedom"
-    },
-    {
-      "tag": "block",
-      "protocol": "blackhole"
-    },
-    {
-      "tag": "auto-cdn-wire-1-",
-      "protocol": "vless",
-      "settings": {
-        "vnext": [
-          {
-            "address": "a6.syncsync.top",
-            "port": 443,
-            "users": [
-              {
-                "id": "f26e6b01-8076-4b6a-8203-c669cb3dd9fe",
-                "encryption": "none",
-                "flow": ""
-              }
-            ]
-          }
-        ]
-      },
-      "streamSettings": {
-        "network": "xhttp",
-        "xhttpSettings": {
-          "mode": "packet-up",
-          "host": "a6.syncsync.top",
-          "path": "\/poll\/",
-          "extra": {
-            "xmux": {
-              "cMaxReuseTimes": "0",
-              "maxConcurrency": "16-32",
-              "hKeepAlivePeriod": 0,
-              "hMaxRequestTimes": "0",
-              "hMaxReusableSecs": "0"
-            },
-            "seqKey": "offset",
-            "headers": {
-              "Accept": "application\/vnd.api+json, application\/json, text\/plain, *\/*",
-              "Pragma": "no-cache",
-              "Cache-Control": "no-cache",
-              "Accept-Language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7"
-            },
-            "sessionKey": "media_sid",
-            "xPaddingKey": "q",
-            "seqPlacement": "query",
-            "sessionIDKey": "media_sid",
-            "uplinkDataKey": "X-Playback-Token",
-            "xPaddingBytes": "48-320",
-            "sessionIDTable": "Base62",
-            "xPaddingHeader": "X-Rewrite-URL",
-            "xPaddingMethod": "tokenish",
-            "sessionIDLength": "16-32",
-            "sessionPlacement": "cookie",
-            "uplinkHTTPMethod": "GET",
-            "xPaddingObfsMode": true,
-            "xPaddingPlacement": "queryInHeader",
-            "scMaxBufferedPosts": 256,
-            "scMaxEachPostBytes": "12288-18432",
-            "sessionIDPlacement": "cookie",
-            "uplinkDataPlacement": "header",
-            "scMinPostsIntervalMs": "4-10",
-            "serverMaxHeaderBytes": 32768
-          }
+        "network": "hysteria",
+        "hysteriaSettings": {
+          "version": 2,
+          "auth": "f26e6b01-8076-4b6a-8203-c669cb3dd9fe"
         },
         "security": "tls",
         "tlsSettings": {
-          "serverName": "a6.syncsync.top",
+          "serverName": "de5.syncedge.net",
           "enableSessionResumption": false,
-          "fingerprint": "chrome",
+          "fingerprint": "firefox",
           "alpn": [
-            "h2",
-            "http\/1.1"
+            "h3"
           ]
         },
-        "sockopt": {
-          "domainStrategy": "UseIPv4"
+        "finalmask": {
+          "udp": [
+            {
+              "type": "noise",
+              "settings": {
+                "noise": [
+                  {
+                    "type": "hex",
+                    "delay": "100",
+                    "packet": "010000019a2b3c4d5e00ffff00fefefefefdfdfdfd123456783f5a1c08d9e24b76"
+                  }
+                ],
+                "reset": "1-2"
+              }
+            }
+          ],
+          "quicParams": {
+            "bbrProfile": "aggressive",
+            "congestion": "bbr",
+            "debug": false,
+            "initStreamReceiveWindow": 2097152,
+            "maxStreamReceiveWindow": 8388608,
+            "initConnectionReceiveWindow": 5242880,
+            "maxConnectionReceiveWindow": 20971520,
+            "maxIdleTimeout": 120
+          }
         }
       }
     },
     {
-      "tag": "auto-cdn-wire-2-",
+      "tag": "proxy-xhttp-ee",
       "protocol": "vless",
       "settings": {
         "vnext": [
@@ -315,7 +192,7 @@
         "xhttpSettings": {
           "mode": "packet-up",
           "host": "cdn-ya-ee.syncweb.top",
-          "path": "\/poll\/",
+          "path": "/poll/",
           "extra": {
             "xmux": {
               "cMaxReuseTimes": "0",
@@ -326,7 +203,7 @@
             },
             "seqKey": "offset",
             "headers": {
-              "Accept": "application\/vnd.api+json, application\/json, text\/plain, *\/*",
+              "Accept": "application/vnd.api+json, application/json, text/plain, */*",
               "Pragma": "no-cache",
               "Cache-Control": "no-cache",
               "Accept-Language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7"
@@ -360,7 +237,7 @@
           "fingerprint": "chrome",
           "alpn": [
             "h2",
-            "http\/1.1"
+            "http/1.1"
           ]
         },
         "sockopt": {
@@ -369,734 +246,154 @@
       }
     },
     {
-      "tag": "auto-normal-1-",
-      "protocol": "loopback",
+      "tag": "proxy-xhttp-de",
+      "protocol": "vless",
       "settings": {
-        "inboundTag": "auto-normal-1-in",
-        "sniffing": {
-          "enabled": true,
-          "routeOnly": true,
-          "destOverride": [
-            "http",
-            "tls"
+        "vnext": [
+          {
+            "address": "cdn-ya2.syncweb.top",
+            "port": 443,
+            "users": [
+              {
+                "id": "f26e6b01-8076-4b6a-8203-c669cb3dd9fe",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "xhttpSettings": {
+          "mode": "packet-up",
+          "host": "cdn-ya2.syncweb.top",
+          "path": "/poll/",
+          "extra": {
+            "xmux": {
+              "cMaxReuseTimes": "0",
+              "maxConcurrency": "16-32",
+              "hKeepAlivePeriod": 0,
+              "hMaxRequestTimes": "0",
+              "hMaxReusableSecs": "0"
+            },
+            "seqKey": "offset",
+            "headers": {
+              "Accept": "application/vnd.api+json, application/json, text/plain, */*",
+              "Pragma": "no-cache",
+              "Cache-Control": "no-cache",
+              "Accept-Language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7"
+            },
+            "sessionKey": "media_sid",
+            "xPaddingKey": "q",
+            "seqPlacement": "query",
+            "sessionIDKey": "media_sid",
+            "uplinkDataKey": "X-Playback-Token",
+            "xPaddingBytes": "48-320",
+            "sessionIDTable": "Base62",
+            "xPaddingHeader": "X-Rewrite-URL",
+            "xPaddingMethod": "tokenish",
+            "sessionIDLength": "16-32",
+            "sessionPlacement": "cookie",
+            "uplinkHTTPMethod": "GET",
+            "xPaddingObfsMode": true,
+            "xPaddingPlacement": "queryInHeader",
+            "scMaxBufferedPosts": 256,
+            "scMaxEachPostBytes": "12288-18432",
+            "sessionIDPlacement": "cookie",
+            "uplinkDataPlacement": "header",
+            "scMinPostsIntervalMs": "4-10",
+            "serverMaxHeaderBytes": 32768
+          }
+        },
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "cdn-ya2.syncweb.top",
+          "enableSessionResumption": false,
+          "fingerprint": "chrome",
+          "alpn": [
+            "h2",
+            "http/1.1"
           ]
+        },
+        "sockopt": {
+          "domainStrategy": "UseIPv4"
         }
       }
     },
     {
-      "tag": "auto-normal-2-",
-      "protocol": "loopback",
-      "settings": {
-        "inboundTag": "auto-normal-2-in",
-        "sniffing": {
-          "enabled": true,
-          "routeOnly": true,
-          "destOverride": [
-            "http",
-            "tls"
-          ]
-        }
-      }
+      "tag": "direct",
+      "protocol": "freedom"
     },
     {
-      "tag": "auto-normal-3-",
-      "protocol": "loopback",
-      "settings": {
-        "inboundTag": "auto-normal-3-in",
-        "sniffing": {
-          "enabled": true,
-          "routeOnly": true,
-          "destOverride": [
-            "http",
-            "tls"
-          ]
-        }
-      }
-    },
-    {
-      "tag": "auto-cdn-1-",
-      "protocol": "loopback",
-      "settings": {
-        "inboundTag": "auto-cdn-1-in",
-        "sniffing": {
-          "enabled": true,
-          "routeOnly": true,
-          "destOverride": [
-            "http",
-            "tls",
-            "quic"
-          ]
-        }
-      }
-    },
-    {
-      "tag": "auto-cdn-2-",
-      "protocol": "loopback",
-      "settings": {
-        "inboundTag": "auto-cdn-2-in",
-        "sniffing": {
-          "enabled": true,
-          "routeOnly": true,
-          "destOverride": [
-            "http",
-            "tls",
-            "quic"
-          ]
-        }
-      }
-    },
-    {
-      "tag": "auto-to-usable-",
-      "protocol": "loopback",
-      "settings": {
-        "inboundTag": "auto-to-usable-in"
-      }
-    },
-    {
-      "tag": "auto-to-cdn-",
-      "protocol": "loopback",
-      "settings": {
-        "inboundTag": "auto-to-cdn-in"
-      }
+      "tag": "block",
+      "protocol": "blackhole"
     }
   ],
+  "observatory": {
+    "subjectSelector": [
+      "proxy-"
+    ],
+    "probeURL": "https://www.gstatic.com/generate_204",
+    "probeInterval": "15s",
+    "enableConcurrency": true
+  },
   "routing": {
-    "domainStrategy": "IPIfNonMatch",
     "domainMatcher": "hybrid",
+    "domainStrategy": "IPIfNonMatch",
     "balancers": [
       {
-        "tag": "auto-normal-quality",
+        "tag": "auto-balancer",
         "selector": [
-          "auto-normal-1-",
-          "auto-normal-2-",
-          "auto-normal-3-"
+          "proxy-"
         ],
-        "fallbackTag": "auto-to-usable-",
+        "fallbackTag": "proxy-xhttp-ee",
         "strategy": {
-          "type": "leastLoad",
-          "settings": {
-            "expected": 1,
-            "maxRTT": "2s",
-            "tolerance": 0.25,
-            "costs": [
-              {
-                "regexp": true,
-                "match": "^auto-normal-2-$",
-                "value": 100000000
-              },
-              {
-                "regexp": true,
-                "match": "^auto-normal-3-$",
-                "value": 10000000000
-              }
-            ]
-          }
-        }
-      },
-      {
-        "tag": "auto-normal-usable",
-        "selector": [
-          "auto-normal-1-",
-          "auto-normal-2-",
-          "auto-normal-3-"
-        ],
-        "fallbackTag": "auto-to-cdn-",
-        "strategy": {
-          "type": "leastLoad",
-          "settings": {
-            "expected": 1,
-            "maxRTT": "0s",
-            "tolerance": 0.25,
-            "costs": [
-              {
-                "regexp": true,
-                "match": "^auto-normal-2-$",
-                "value": 100000000
-              },
-              {
-                "regexp": true,
-                "match": "^auto-normal-3-$",
-                "value": 10000000000
-              }
-            ]
-          }
-        }
-      },
-      {
-        "tag": "auto-cdn-reserve",
-        "selector": [
-          "auto-cdn-1-",
-          "auto-cdn-2-"
-        ],
-        "fallbackTag": "auto-normal-1-",
-        "strategy": {
-          "type": "leastLoad",
-          "settings": {
-            "expected": 1,
-            "maxRTT": "0s",
-            "tolerance": 0.25,
-            "costs": [
-              {
-                "regexp": true,
-                "match": "^auto-cdn-2-$",
-                "value": 100000000
-              }
-            ]
-          }
+          "type": "leastPing"
         }
       }
     ],
     "rules": [
       {
         "type": "field",
-        "inboundTag": [
-          "auto-to-usable-in"
-        ],
-        "balancerTag": "auto-normal-usable"
-      },
-      {
-        "type": "field",
-        "inboundTag": [
-          "auto-to-cdn-in"
-        ],
-        "balancerTag": "auto-cdn-reserve"
-      },
-      {
-        "type": "field",
-        "domain": [
-          "full:www.gstatic.com"
-        ],
-        "outboundTag": "proxy-1",
-        "inboundTag": [
-          "auto-normal-1-in"
-        ]
-      },
-      {
-        "type": "field",
-        "domain": [
-          "full:www.gstatic.com"
-        ],
-        "outboundTag": "proxy-2",
-        "inboundTag": [
-          "auto-normal-2-in"
-        ]
-      },
-      {
-        "type": "field",
-        "domain": [
-          "full:www.gstatic.com"
-        ],
-        "outboundTag": "proxy-3",
-        "inboundTag": [
-          "auto-normal-3-in"
-        ]
-      },
-      {
-        "type": "field",
         "network": "udp",
         "port": "443",
-        "outboundTag": "block",
-        "inboundTag": [
-          "auto-normal-1-in",
-          "auto-normal-2-in",
-          "auto-normal-3-in"
-        ]
+        "outboundTag": "block"
       },
       {
         "type": "field",
         "protocol": [
           "bittorrent"
         ],
-        "outboundTag": "direct",
-        "inboundTag": [
-          "auto-normal-1-in",
-          "auto-normal-2-in",
-          "auto-normal-3-in"
-        ]
+        "outboundTag": "direct"
       },
       {
         "type": "field",
         "ip": [
-          "127.0.0.0\/8",
-          "10.0.0.0\/8",
-          "172.16.0.0\/12",
-          "192.168.0.0\/16",
-          "169.254.0.0\/16",
-          "::1\/128",
-          "fc00::\/7",
-          "fe80::\/10"
+          "10.0.0.0/8",
+          "172.16.0.0/12",
+          "192.168.0.0/16",
+          "127.0.0.0/8",
+          "169.254.0.0/16",
+          "100.64.0.0/10",
+          "::1/128",
+          "fc00::/7",
+          "fe80::/10"
         ],
-        "outboundTag": "direct",
-        "inboundTag": [
-          "auto-normal-1-in",
-          "auto-normal-2-in",
-          "auto-normal-3-in"
-        ]
+        "outboundTag": "direct"
       },
       {
         "type": "field",
         "ip": [
-          "95.129.232.0\/24",
-          "95.129.236.0\/24"
+          "95.129.232.0/24",
+          "95.129.236.0/24"
         ],
-        "outboundTag": "proxy-1",
-        "inboundTag": [
-          "auto-normal-1-in"
-        ]
+        "balancerTag": "auto-balancer"
       },
       {
         "type": "field",
         "domain": [
-          "domain:2gis.ru"
-        ],
-        "outboundTag": "proxy-1",
-        "inboundTag": [
-          "auto-normal-1-in"
-        ]
-      },
-      {
-        "type": "field",
-        "ip": [
-          "95.129.232.0\/24",
-          "95.129.236.0\/24"
-        ],
-        "outboundTag": "proxy-2",
-        "inboundTag": [
-          "auto-normal-2-in"
-        ]
-      },
-      {
-        "type": "field",
-        "domain": [
-          "domain:2gis.ru"
-        ],
-        "outboundTag": "proxy-2",
-        "inboundTag": [
-          "auto-normal-2-in"
-        ]
-      },
-      {
-        "type": "field",
-        "ip": [
-          "95.129.232.0\/24",
-          "95.129.236.0\/24"
-        ],
-        "outboundTag": "proxy-3",
-        "inboundTag": [
-          "auto-normal-3-in"
-        ]
-      },
-      {
-        "type": "field",
-        "domain": [
-          "domain:2gis.ru"
-        ],
-        "outboundTag": "proxy-3",
-        "inboundTag": [
-          "auto-normal-3-in"
-        ]
-      },
-      {
-        "type": "field",
-        "domain": [
-          "domain:*-courier.push.apple.com",
-          "domain:11cdn.org",
-          "domain:24helloservice.ru",
-          "domain:24smi.org",
-          "domain:2gis.com.cy",
-          "domain:2gis.cz",
-          "domain:2gis.kz",
-          "domain:2gis.tech",
-          "domain:3ddd.ru",
-          "domain:3ebra.net",
-          "domain:a-comics.ru",
-          "domain:adiam.tech",
-          "domain:admetrica.ru",
-          "domain:ads.yandex",
-          "domain:al-adtech.com",
-          "domain:alfabank.by",
-          "domain:amazing-online.com",
-          "domain:amediateka.ru",
-          "domain:animego.me",
-          "domain:api.push.apple.com",
-          "domain:apibar.cloud",
-          "domain:appmetrica.yandex.net",
-          "domain:ardis.ru",
-          "domain:auth-nsdi.ru",
-          "domain:aviasales.com",
-          "domain:aviasales.ru",
-          "domain:bankermak.ru",
-          "domain:bbshave.ru",
-          "domain:bigsv.ru",
-          "domain:bitrace.ru",
-          "domain:bizkub.ru",
-          "domain:bookmaker-ratings.ru",
-          "domain:bryansk.ru",
-          "domain:carrotquest.io",
-          "domain:cdn-vk.ru",
-          "domain:centrsvet.com",
-          "domain:cian.site",
-          "domain:citywalls.ru",
-          "domain:class365.ru",
-          "domain:comss.online",
-          "domain:crucial.com",
-          "domain:da.ru",
-          "domain:dgis.ru",
-          "domain:digimap.ru",
-          "domain:dikidi.net",
-          "domain:dikidi.ru",
-          "domain:dodostatic.net",
-          "domain:dogovor-oferta.online",
-          "domain:dominsoft.ru",
-          "domain:domyland.ru",
-          "domain:dzeninfra.ru",
-          "domain:e-fiveflowers.ru",
-          "domain:e5.ru",
-          "domain:easykassa.ru",
-          "domain:eda1.ru",
-          "domain:eehome.ru",
-          "domain:eterfund.ru",
-          "domain:fesco.com",
-          "domain:festima.ru",
-          "domain:fictionbook.ru",
-          "domain:firstbyte.ru",
-          "domain:fittin.ru",
-          "domain:fix-price.com",
-          "domain:fix-price.ru",
-          "domain:flexireg.ru",
-          "domain:flomni.com",
-          "domain:future-aihub.com",
-          "domain:gazprombank.com",
-          "domain:gdeposylka.ru",
-          "domain:genotek.am",
-          "domain:genotek.eu",
-          "domain:genotek.ru",
-          "domain:ggsel.com",
-          "domain:gigachat.ru",
-          "domain:gismeteo.kz",
-          "domain:gta-mobile.ru",
-          "domain:hitmoz.org",
-          "domain:hobbygames.ru",
-          "domain:holst.so",
-          "domain:idaprikol.ru",
-          "domain:iflat.ru",
-          "domain:imem.me",
-          "domain:inn.ru",
-          "domain:is-telecom.ru",
-          "domain:isimple.ru",
-          "domain:ixbt.pro",
-          "domain:ixbt.site",
-          "domain:jivochat.com",
-          "domain:jivosite.com",
-          "domain:jx5.ru",
-          "domain:kaspersky.com",
-          "domain:kaspersky.kz",
-          "domain:kaspersky.ru",
-          "domain:kinoplan.ru",
-          "domain:krtech.ru",
-          "domain:l-parfum.ru",
-          "domain:laxo.one",
-          "domain:leonardo.ru",
-          "domain:leroymerlin.ru",
-          "domain:libreview.ru",
-          "domain:livesport.ru",
-          "domain:magicrust.gg",
-          "domain:magput.ru",
-          "domain:majestic-rp.ru",
-          "domain:mave.digital",
-          "domain:mc.yandex.net",
-          "domain:megamarket.tech",
-          "domain:meowconnect.com",
-          "domain:mileonair.com",
-          "domain:minta365.ru",
-          "domain:mirf.ru",
-          "domain:mironline.ru",
-          "domain:mosline.ru",
-          "domain:mpets.su",
-          "domain:mradx.net",
-          "domain:mst.link",
-          "domain:mtalk.google.com",
-          "domain:multiurok.ru",
-          "domain:myrostelecom.ru",
-          "domain:naukapbx.ru",
-          "domain:neo-s.ru",
-          "domain:nextroute.network",
-          "domain:ntel.ru",
-          "domain:odnoklasniki.ua",
-          "domain:okko.sport",
-          "domain:okko.tv",
-          "domain:olservice.ru",
-          "domain:on-telecom.ru",
-          "domain:oneme.ru",
-          "domain:online-translator.com",
-          "domain:ontvtime.ru",
-          "domain:openbank.ru",
-          "domain:ozon.kz",
-          "domain:ozonbank.ru",
-          "domain:ozonusercontent.com",
-          "domain:pampik.com",
-          "domain:perx.ru",
-          "domain:phoenix-dnr.ru",
-          "domain:pitergsm.ru",
-          "domain:pizzasoft.ru",
-          "domain:platega.io",
-          "domain:playerok.com",
-          "domain:playgamesonline.ru",
-          "domain:playstand.ru",
-          "domain:positivesystems.ru",
-          "domain:prlab.ru",
-          "domain:propremiumfurniture.ru",
-          "domain:public.express",
-          "domain:push-apple.com.akadns.net",
-          "domain:push.apple.com",
-          "domain:qsolution.ru",
-          "domain:rb.ru",
-          "domain:realtycalendar.ru",
-          "domain:res-nsdi.ru",
-          "domain:restnproducts.ru",
-          "domain:ridus.ru",
-          "domain:rosenergo.com",
-          "domain:rtvi.com",
-          "domain:ru-tld.ru",
-          "domain:rumap.ru",
-          "domain:rus.promo",
-          "domain:rutube-list.ru",
-          "domain:rutube.tech",
-          "domain:s01.stc.yc.kpcdn.net",
-          "domain:s02.stc.yc.kpcdn.net",
-          "domain:s03.stc.yc.kpcdn.net",
-          "domain:s09.stc.yc.kpcdn.net",
-          "domain:s10.stc.yc.kpcdn.net",
-          "domain:s11.stc.yc.kpcdn.net",
-          "domain:s12.stc.yc.kpcdn.net",
-          "domain:s13.stc.yc.kpcdn.net",
-          "domain:s14.stc.yc.kpcdn.net",
-          "domain:s15.stc.yc.kpcdn.net",
-          "domain:s16.stc.yc.kpcdn.net",
-          "domain:sberbankonline.ru",
-          "domain:sbercloud.tech",
-          "domain:sberpay.ru",
-          "domain:sdek.ru",
-          "domain:sdelayhod.ru",
-          "domain:segmento.ru",
-          "domain:sevstar.net",
-          "domain:sgoedu74.ru",
-          "domain:shoko.ru",
-          "domain:simstar.net",
-          "domain:skillcup.ru",
-          "domain:skysound7.com",
-          "domain:slovarsbor.ru",
-          "domain:smr.ru",
-          "domain:snob.ru",
-          "domain:softline.ru",
-          "domain:sovsport.ru",
-          "domain:spectr-pdd.ru",
-          "domain:spletnik.ru",
-          "domain:starterapp.ru",
-          "domain:stemhost.ru",
-          "domain:stepavpn.ru",
-          "domain:streis.ru",
-          "domain:t-zhurnal.ru",
-          "domain:talentforce.ru",
-          "domain:tbank.global",
-          "domain:telincom.ru",
-          "domain:tgnn.live",
-          "domain:thepoizon.ru",
-          "domain:timernet.ru",
-          "domain:tinkoff.ai",
-          "domain:tinkoffbank.ru",
-          "domain:tlintegration.com",
-          "domain:tlpt.su",
-          "domain:toptechnika.ru",
-          "domain:track24.ru",
-          "domain:tradedealer.ru",
-          "domain:trafficfactory.biz",
-          "domain:trustpool.cc",
-          "domain:turskidki.ru",
-          "domain:twiket.com",
-          "domain:uazbuka.ru",
-          "domain:uubb.website",
-          "domain:uzum.uz",
-          "domain:velberis.ru",
-          "domain:vidnoenet.ru",
-          "domain:vk-analytics.ru",
-          "domain:vk-cdn.me",
-          "domain:vk-cdn.net",
-          "domain:vkcache.com",
-          "domain:vkcloud-static.kz",
-          "domain:vkcloud.kz",
-          "domain:vktech-static.ru",
-          "domain:vkworkspace.kz",
-          "domain:volyairazum.ru",
-          "domain:vsrobotics.ru",
-          "domain:waldberis.ru",
-          "domain:wallberis.ru",
-          "domain:wb-basket.ru",
-          "domain:wbbasket.ru",
-          "domain:wbmotivator.ru",
-          "domain:webinar.ru",
-          "domain:weborama-tech.ru",
-          "domain:webvisor.org",
-          "domain:weildberries.ru",
-          "domain:whoosh.bike",
-          "domain:widberri.ru",
-          "domain:wifly.net",
-          "domain:wildbaries.ru",
-          "domain:wildberriess.ru",
-          "domain:wildberrise.ru",
-          "domain:wildbress.ru",
-          "domain:wildbries.ru",
-          "domain:wiliberes.ru",
-          "domain:www1.ru",
-          "domain:x5.com",
-          "domain:x5.group",
-          "domain:x5.media",
-          "domain:x5l.ru",
-          "domain:x5q.ru",
-          "domain:x5static.net",
-          "domain:xn--80adi0cbch.xn--p1ai",
-          "domain:yads.tech",
-          "domain:yandex.com.tr",
-          "domain:yandex.com.ua",
-          "domain:yandex.kg",
-          "domain:yandex.kz",
-          "domain:yandex.ua",
-          "domain:yandexadexchange.com",
-          "domain:yandexcdn.net",
-          "domain:yandexcloud.net",
-          "domain:yandexmetrica.com",
-          "domain:yango.com",
-          "domain:yango.taxi",
-          "domain:yango.tech",
-          "domain:yoobusiness.ru",
-          "domain:youboost.app",
-          "domain:your-durev.com",
-          "domain:ru",
-          "domain:10g.su",
-          "domain:2ch.su",
-          "domain:2d.su",
-          "domain:argo-net.su",
-          "domain:atb.su",
-          "domain:ati.su",
-          "domain:atrucks.su",
-          "domain:autotrade.su",
-          "domain:bizorg.su",
-          "domain:clan.su",
-          "domain:cmd.su",
-          "domain:dnd.su",
-          "domain:envybox.su",
-          "domain:fotohosting.su",
-          "domain:funtime.su",
-          "domain:goo.su",
-          "domain:ifreedom.su",
-          "domain:jet.su",
-          "domain:jfn.su",
-          "domain:korabli.su",
-          "domain:krasnodarmedia.su",
-          "domain:leads.su",
-          "domain:moy.su",
-          "domain:nash-dom2.su",
-          "domain:netgo.su",
-          "domain:netsol.su",
-          "domain:parus.su",
-          "domain:premiumbonus.su",
-          "domain:promportal.su",
-          "domain:radix-linux.su",
-          "domain:ravenol.su",
-          "domain:rusvesna.su",
-          "domain:service-online.su",
-          "domain:sevastopol.su",
-          "domain:site.su",
-          "domain:sotel.su",
-          "domain:staroetv.su",
-          "domain:svo.su",
-          "domain:tanki.su",
-          "domain:tischenko.su",
-          "domain:titun.su",
-          "domain:trade.su",
-          "domain:uguide.su",
-          "domain:ul.su",
-          "domain:waw.su",
-          "domain:yooma.su",
-          "domain:ztv.su",
-          "domain:xn--p1ai"
-        ],
-        "outboundTag": "direct",
-        "inboundTag": [
-          "auto-normal-1-in",
-          "auto-normal-2-in",
-          "auto-normal-3-in"
-        ]
-      },
-      {
-        "type": "field",
-        "outboundTag": "direct",
-        "inboundTag": [
-          "auto-normal-1-in",
-          "auto-normal-2-in",
-          "auto-normal-3-in"
-        ],
-        "ip": [
-          "geoip:ru"
-        ]
-      },
-      {
-        "type": "field",
-        "network": "tcp,udp",
-        "outboundTag": "proxy-1",
-        "inboundTag": [
-          "auto-normal-1-in"
-        ]
-      },
-      {
-        "type": "field",
-        "network": "tcp,udp",
-        "outboundTag": "proxy-2",
-        "inboundTag": [
-          "auto-normal-2-in"
-        ]
-      },
-      {
-        "type": "field",
-        "network": "tcp,udp",
-        "outboundTag": "proxy-3",
-        "inboundTag": [
-          "auto-normal-3-in"
-        ]
-      },
-      {
-        "type": "field",
-        "domain": [
-          "full:www.gstatic.com"
-        ],
-        "outboundTag": "auto-cdn-wire-1-",
-        "inboundTag": [
-          "auto-cdn-1-in"
-        ]
-      },
-      {
-        "type": "field",
-        "domain": [
-          "full:www.gstatic.com"
-        ],
-        "outboundTag": "auto-cdn-wire-2-",
-        "inboundTag": [
-          "auto-cdn-2-in"
-        ]
-      },
-      {
-        "type": "field",
-        "network": "udp",
-        "port": "443",
-        "outboundTag": "block",
-        "inboundTag": [
-          "auto-cdn-1-in",
-          "auto-cdn-2-in"
-        ]
-      },
-      {
-        "type": "field",
-        "domain": [
+          "domain:2gis.ru",
           "full:1cfresh.com",
           "full:kaspersky.com",
           "full:zen.yandex.com",
@@ -1165,115 +462,7 @@
           "full:tns-counter.ru",
           "full:www.tns-counter.ru"
         ],
-        "outboundTag": "auto-cdn-wire-1-",
-        "inboundTag": [
-          "auto-cdn-1-in"
-        ]
-      },
-      {
-        "type": "field",
-        "domain": [
-          "full:1cfresh.com",
-          "full:kaspersky.com",
-          "full:zen.yandex.com",
-          "full:www.zvuk.com",
-          "full:www.sleza.media",
-          "full:stats.vk-portal.net",
-          "full:egress.yandex.net",
-          "full:strm-rad-23.strm.yandex.net",
-          "full:zen.yandex.net",
-          "full:smartmed.pro",
-          "full:360.ru",
-          "full:www.ctc.ru",
-          "full:api.dobro.ru",
-          "full:forbes.ru",
-          "full:www.forbes.ru",
-          "full:api.gismeteo.ru",
-          "full:img.gismeteo.ru",
-          "full:lk.digital.gov.ru",
-          "full:www.kchr.ru",
-          "full:8march.mail.ru",
-          "full:9may.mail.ru",
-          "full:aa.mail.ru",
-          "full:av.mail.ru",
-          "full:bb.mail.ru",
-          "full:cf.mail.ru",
-          "full:dn.mail.ru",
-          "full:et.mail.ru",
-          "full:fe.mail.ru",
-          "full:journey.mail.ru",
-          "full:junior.mail.ru",
-          "full:la.mail.ru",
-          "full:love.mail.ru",
-          "full:kz.mcs.mail.ru",
-          "full:new.mail.ru",
-          "full:rt.api.operator.mail.ru",
-          "full:static.operator.mail.ru",
-          "full:pp.mail.ru",
-          "full:www.pubg.mail.ru",
-          "full:pw.mail.ru",
-          "full:stand.pw.mail.ru",
-          "full:rev.mail.ru",
-          "full:security.mail.ru",
-          "full:tera.mail.ru",
-          "full:warface.mail.ru",
-          "full:wf.mail.ru",
-          "full:wok.mail.ru",
-          "full:wos.mail.ru",
-          "full:www.medsi.ru",
-          "full:muz-tv.ru",
-          "full:securepay.ozon.ru",
-          "full:ruwiki.ru",
-          "full:ru.ruwiki.ru",
-          "full:www.ruwiki.ru",
-          "full:cargo.rzd.ru",
-          "full:disk.rzd.ru",
-          "full:market.rzd.ru",
-          "full:my.rzd.ru",
-          "full:secure.rzd.ru",
-          "full:secure-cloud.rzd.ru",
-          "full:team.rzd.ru",
-          "full:welcome.rzd.ru",
-          "full:bfds.sberbank.ru",
-          "full:pl-res.online.sberbank.ru",
-          "full:cobrowsing.tbank.ru",
-          "full:hrc.tbank.ru",
-          "full:tns-counter.ru",
-          "full:www.tns-counter.ru"
-        ],
-        "outboundTag": "auto-cdn-wire-2-",
-        "inboundTag": [
-          "auto-cdn-2-in"
-        ]
-      },
-      {
-        "type": "field",
-        "protocol": [
-          "bittorrent"
-        ],
-        "outboundTag": "direct",
-        "inboundTag": [
-          "auto-cdn-1-in",
-          "auto-cdn-2-in"
-        ]
-      },
-      {
-        "type": "field",
-        "ip": [
-          "10.0.0.0\/8",
-          "172.16.0.0\/12",
-          "192.168.0.0\/16",
-          "127.0.0.0\/8",
-          "169.254.0.0\/16",
-          "100.64.0.0\/10",
-          "fc00::\/7",
-          "fe80::\/10"
-        ],
-        "outboundTag": "direct",
-        "inboundTag": [
-          "auto-cdn-1-in",
-          "auto-cdn-2-in"
-        ]
+        "balancerTag": "auto-balancer"
       },
       {
         "type": "field",
@@ -1579,19 +768,8 @@
           "domain:youla.ru",
           "domain:znanierussia.ru",
           "domain:zvuk-b2b.com",
-          "domain:zvuk.com"
-        ],
-        "outboundTag": "direct",
-        "inboundTag": [
-          "auto-cdn-1-in",
-          "auto-cdn-2-in"
-        ]
-      },
-      {
-        "type": "field",
-        "domain": [
+          "domain:zvuk.com",
           "max.ru",
-          "domain:2gis.ru",
           "domain:ads.x5.ru",
           "domain:2gis.com",
           "domain:aif.ru",
@@ -1678,47 +856,321 @@
           "domain:wibes.ru",
           "domain:wbpay.ru",
           "domain:xn--80acbjgmges7ca.xn--p1ai",
-          "domain:xn--80acbjgsdq2cl.xn--p1ai"
+          "domain:xn--80acbjgsdq2cl.xn--p1ai",
+          "domain:*-courier.push.apple.com",
+          "domain:11cdn.org",
+          "domain:24helloservice.ru",
+          "domain:24smi.org",
+          "domain:2gis.com.cy",
+          "domain:2gis.cz",
+          "domain:2gis.kz",
+          "domain:2gis.tech",
+          "domain:3ddd.ru",
+          "domain:3ebra.net",
+          "domain:a-comics.ru",
+          "domain:adiam.tech",
+          "domain:admetrica.ru",
+          "domain:ads.yandex",
+          "domain:al-adtech.com",
+          "domain:alfabank.by",
+          "domain:amazing-online.com",
+          "domain:amediateka.ru",
+          "domain:animego.me",
+          "domain:api.push.apple.com",
+          "domain:apibar.cloud",
+          "domain:appmetrica.yandex.net",
+          "domain:ardis.ru",
+          "domain:auth-nsdi.ru",
+          "domain:aviasales.com",
+          "domain:aviasales.ru",
+          "domain:bankermak.ru",
+          "domain:bbshave.ru",
+          "domain:bigsv.ru",
+          "domain:bitrace.ru",
+          "domain:bizkub.ru",
+          "domain:bookmaker-ratings.ru",
+          "domain:bryansk.ru",
+          "domain:carrotquest.io",
+          "domain:centrsvet.com",
+          "domain:cian.site",
+          "domain:citywalls.ru",
+          "domain:class365.ru",
+          "domain:comss.online",
+          "domain:crucial.com",
+          "domain:da.ru",
+          "domain:dgis.ru",
+          "domain:digimap.ru",
+          "domain:dikidi.net",
+          "domain:dikidi.ru",
+          "domain:dogovor-oferta.online",
+          "domain:dominsoft.ru",
+          "domain:domyland.ru",
+          "domain:e-fiveflowers.ru",
+          "domain:easykassa.ru",
+          "domain:eda1.ru",
+          "domain:eehome.ru",
+          "domain:eterfund.ru",
+          "domain:fesco.com",
+          "domain:festima.ru",
+          "domain:fictionbook.ru",
+          "domain:firstbyte.ru",
+          "domain:fittin.ru",
+          "domain:fix-price.com",
+          "domain:fix-price.ru",
+          "domain:flexireg.ru",
+          "domain:flomni.com",
+          "domain:future-aihub.com",
+          "domain:gazprombank.com",
+          "domain:gdeposylka.ru",
+          "domain:genotek.am",
+          "domain:genotek.eu",
+          "domain:genotek.ru",
+          "domain:ggsel.com",
+          "domain:gigachat.ru",
+          "domain:gismeteo.kz",
+          "domain:gta-mobile.ru",
+          "domain:hitmoz.org",
+          "domain:hobbygames.ru",
+          "domain:holst.so",
+          "domain:idaprikol.ru",
+          "domain:iflat.ru",
+          "domain:imem.me",
+          "domain:inn.ru",
+          "domain:is-telecom.ru",
+          "domain:isimple.ru",
+          "domain:ixbt.pro",
+          "domain:ixbt.site",
+          "domain:jivochat.com",
+          "domain:kaspersky.kz",
+          "domain:kinoplan.ru",
+          "domain:krtech.ru",
+          "domain:l-parfum.ru",
+          "domain:laxo.one",
+          "domain:leonardo.ru",
+          "domain:leroymerlin.ru",
+          "domain:libreview.ru",
+          "domain:livesport.ru",
+          "domain:magicrust.gg",
+          "domain:magput.ru",
+          "domain:majestic-rp.ru",
+          "domain:mave.digital",
+          "domain:mc.yandex.net",
+          "domain:meowconnect.com",
+          "domain:mileonair.com",
+          "domain:minta365.ru",
+          "domain:mirf.ru",
+          "domain:mironline.ru",
+          "domain:mosline.ru",
+          "domain:mpets.su",
+          "domain:mst.link",
+          "domain:mtalk.google.com",
+          "domain:multiurok.ru",
+          "domain:myrostelecom.ru",
+          "domain:naukapbx.ru",
+          "domain:neo-s.ru",
+          "domain:nextroute.network",
+          "domain:ntel.ru",
+          "domain:odnoklasniki.ua",
+          "domain:olservice.ru",
+          "domain:on-telecom.ru",
+          "domain:online-translator.com",
+          "domain:ontvtime.ru",
+          "domain:openbank.ru",
+          "domain:ozon.kz",
+          "domain:ozonbank.ru",
+          "domain:pampik.com",
+          "domain:perx.ru",
+          "domain:phoenix-dnr.ru",
+          "domain:pitergsm.ru",
+          "domain:pizzasoft.ru",
+          "domain:platega.io",
+          "domain:playerok.com",
+          "domain:playgamesonline.ru",
+          "domain:playstand.ru",
+          "domain:positivesystems.ru",
+          "domain:prlab.ru",
+          "domain:propremiumfurniture.ru",
+          "domain:public.express",
+          "domain:push-apple.com.akadns.net",
+          "domain:push.apple.com",
+          "domain:qsolution.ru",
+          "domain:rb.ru",
+          "domain:realtycalendar.ru",
+          "domain:res-nsdi.ru",
+          "domain:restnproducts.ru",
+          "domain:ridus.ru",
+          "domain:rosenergo.com",
+          "domain:rtvi.com",
+          "domain:ru-tld.ru",
+          "domain:rumap.ru",
+          "domain:rus.promo",
+          "domain:rutube-list.ru",
+          "domain:rutube.tech",
+          "domain:s01.stc.yc.kpcdn.net",
+          "domain:s02.stc.yc.kpcdn.net",
+          "domain:s03.stc.yc.kpcdn.net",
+          "domain:s09.stc.yc.kpcdn.net",
+          "domain:s10.stc.yc.kpcdn.net",
+          "domain:s11.stc.yc.kpcdn.net",
+          "domain:s12.stc.yc.kpcdn.net",
+          "domain:s13.stc.yc.kpcdn.net",
+          "domain:s14.stc.yc.kpcdn.net",
+          "domain:s15.stc.yc.kpcdn.net",
+          "domain:s16.stc.yc.kpcdn.net",
+          "domain:sberbankonline.ru",
+          "domain:sbercloud.tech",
+          "domain:sberpay.ru",
+          "domain:sdek.ru",
+          "domain:sdelayhod.ru",
+          "domain:segmento.ru",
+          "domain:sevstar.net",
+          "domain:sgoedu74.ru",
+          "domain:shoko.ru",
+          "domain:simstar.net",
+          "domain:skillcup.ru",
+          "domain:skysound7.com",
+          "domain:slovarsbor.ru",
+          "domain:smr.ru",
+          "domain:snob.ru",
+          "domain:softline.ru",
+          "domain:sovsport.ru",
+          "domain:spectr-pdd.ru",
+          "domain:spletnik.ru",
+          "domain:starterapp.ru",
+          "domain:stemhost.ru",
+          "domain:stepavpn.ru",
+          "domain:streis.ru",
+          "domain:t-zhurnal.ru",
+          "domain:talentforce.ru",
+          "domain:tbank.global",
+          "domain:telincom.ru",
+          "domain:tgnn.live",
+          "domain:thepoizon.ru",
+          "domain:timernet.ru",
+          "domain:tinkoff.ai",
+          "domain:tinkoffbank.ru",
+          "domain:tlintegration.com",
+          "domain:tlpt.su",
+          "domain:toptechnika.ru",
+          "domain:track24.ru",
+          "domain:tradedealer.ru",
+          "domain:trafficfactory.biz",
+          "domain:trustpool.cc",
+          "domain:turskidki.ru",
+          "domain:twiket.com",
+          "domain:uazbuka.ru",
+          "domain:uubb.website",
+          "domain:uzum.uz",
+          "domain:velberis.ru",
+          "domain:vidnoenet.ru",
+          "domain:vk-cdn.me",
+          "domain:vkcache.com",
+          "domain:vkcloud-static.kz",
+          "domain:vkcloud.kz",
+          "domain:vktech-static.ru",
+          "domain:vkworkspace.kz",
+          "domain:volyairazum.ru",
+          "domain:vsrobotics.ru",
+          "domain:waldberis.ru",
+          "domain:wallberis.ru",
+          "domain:wb-basket.ru",
+          "domain:wbmotivator.ru",
+          "domain:webinar.ru",
+          "domain:weborama-tech.ru",
+          "domain:webvisor.org",
+          "domain:weildberries.ru",
+          "domain:widberri.ru",
+          "domain:wifly.net",
+          "domain:wildbaries.ru",
+          "domain:wildberriess.ru",
+          "domain:wildberrise.ru",
+          "domain:wildbress.ru",
+          "domain:wildbries.ru",
+          "domain:wiliberes.ru",
+          "domain:www1.ru",
+          "domain:x5.com",
+          "domain:x5.group",
+          "domain:x5.media",
+          "domain:xn--80adi0cbch.xn--p1ai",
+          "domain:yads.tech",
+          "domain:yandex.com.tr",
+          "domain:yandex.com.ua",
+          "domain:yandex.kg",
+          "domain:yandex.kz",
+          "domain:yandex.ua",
+          "domain:yandexadexchange.com",
+          "domain:yandexcdn.net",
+          "domain:yandexmetrica.com",
+          "domain:yango.com",
+          "domain:yango.taxi",
+          "domain:yango.tech",
+          "domain:yoobusiness.ru",
+          "domain:youboost.app",
+          "domain:your-durev.com",
+          "domain:ru",
+          "domain:10g.su",
+          "domain:2ch.su",
+          "domain:2d.su",
+          "domain:argo-net.su",
+          "domain:atb.su",
+          "domain:ati.su",
+          "domain:atrucks.su",
+          "domain:autotrade.su",
+          "domain:bizorg.su",
+          "domain:clan.su",
+          "domain:cmd.su",
+          "domain:dnd.su",
+          "domain:envybox.su",
+          "domain:fotohosting.su",
+          "domain:funtime.su",
+          "domain:goo.su",
+          "domain:ifreedom.su",
+          "domain:jet.su",
+          "domain:jfn.su",
+          "domain:korabli.su",
+          "domain:krasnodarmedia.su",
+          "domain:leads.su",
+          "domain:moy.su",
+          "domain:nash-dom2.su",
+          "domain:netgo.su",
+          "domain:netsol.su",
+          "domain:parus.su",
+          "domain:premiumbonus.su",
+          "domain:promportal.su",
+          "domain:radix-linux.su",
+          "domain:ravenol.su",
+          "domain:rusvesna.su",
+          "domain:service-online.su",
+          "domain:sevastopol.su",
+          "domain:site.su",
+          "domain:sotel.su",
+          "domain:staroetv.su",
+          "domain:svo.su",
+          "domain:tanki.su",
+          "domain:tischenko.su",
+          "domain:titun.su",
+          "domain:trade.su",
+          "domain:uguide.su",
+          "domain:ul.su",
+          "domain:waw.su",
+          "domain:yooma.su",
+          "domain:ztv.su",
+          "domain:xn--p1ai"
         ],
+        "outboundTag": "direct"
+      },
+      {
+        "type": "field",
         "outboundTag": "direct",
-        "inboundTag": [
-          "auto-cdn-1-in",
-          "auto-cdn-2-in"
+        "ip": [
+          "geoip:ru"
         ]
       },
       {
         "type": "field",
         "network": "tcp,udp",
-        "outboundTag": "auto-cdn-wire-1-",
-        "inboundTag": [
-          "auto-cdn-1-in"
-        ]
-      },
-      {
-        "type": "field",
-        "network": "tcp,udp",
-        "outboundTag": "auto-cdn-wire-2-",
-        "inboundTag": [
-          "auto-cdn-2-in"
-        ]
-      },
-      {
-        "type": "field",
-        "network": "tcp,udp",
-        "balancerTag": "auto-normal-quality"
+        "balancerTag": "auto-balancer"
       }
     ]
-  },
-  "observatory": {
-    "subjectSelector": [
-      "auto-normal-1-",
-      "auto-normal-2-",
-      "auto-normal-3-",
-      "auto-cdn-1-",
-      "auto-cdn-2-"
-    ],
-    "probeURL": "https:\/\/www.gstatic.com\/generate_204",
-    "probeInterval": "45s",
-    "enableConcurrency": true
   }
 }
